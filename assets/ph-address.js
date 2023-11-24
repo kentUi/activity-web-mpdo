@@ -1,6 +1,6 @@
 function LIST_OF_REGIONS(){
 	$.ajax({
-		url: 'https://api.xkent.me/ph-location/region/',
+		url: 'https://api.portaltoo.cloud/ph-location/region/',
 		method: 'POST',
 		data: {'Request': 'Region'},
 		success: function(response){
@@ -19,7 +19,7 @@ function LIST_OF_REGIONS(){
 
 function DISPLAY_PROVINCE(code){
 	$.ajax({
-		url: 'https://api.xkent.me/ph-location/province/' + code,
+		url: 'https://api.portaltoo.cloud/ph-location/province/' + code,
 		method: 'POST',
 		data: {'Request': 'Province'},
 		success: function(response){
@@ -39,7 +39,7 @@ function DISPLAY_PROVINCE(code){
 
 function DISPLAY_CITYMUN(code){
 	$.ajax({
-		url: 'https://api.xkent.me/ph-location/citymun/' + code,
+		url: 'https://api.portaltoo.cloud/ph-location/citymun/' + code,
 		method: 'POST',
 		data: {'Request': 'City/Municipality'},
 		success: function(response){
@@ -58,7 +58,7 @@ function DISPLAY_CITYMUN(code){
 
 function DISPLAY_BARANGAY(code){
 	$.ajax({
-		url: 'https://api.xkent.me/ph-location/brgy/' + code,
+		url: 'https://api.portaltoo.cloud/ph-location/brgy/' + code,
 		method: 'POST',
 		data: {'Request': 'Brgy'},
 		success: function(response){

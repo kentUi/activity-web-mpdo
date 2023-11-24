@@ -16,38 +16,57 @@ $ownerTitle = $_POST['inp_ownertitle'];
 $receiver = $_POST['inp_receiver'];
 $email = $_POST['inp_email'];
 $mobile = $_POST['inp_mobile'];
-$tempFilePath = $_FILES['inp_uploadfile1']['tmp_name'];
+$tempFilePath1 = $_FILES['inp_uploadfile1']['tmp_name'];
+$tempFilePath2 = $_FILES['inp_uploadfile2']['tmp_name'];
+$tempFilePath3 = $_FILES['inp_uploadfile3']['tmp_name'];
 
 
 $uploadDir = "./uploads/"; // Directory to store uploaded files
-$uploadedFile = $_FILES['inp_uploadfile1']['name'];
-$targetFile = $uploadDir . basename($uploadedFile);
 
-$sql = "INSERT INTO t_applications ( req_firstName, req_lastName, req_owner, req_region, req_province, req_citymun, req_brgy, req_street, req_sqrmeter, req_overland, req_mode, req_ownertitle, req_receiver, req_email, req_mobile, req_filereference ) VALUES ( '$firstName', '$lastName', '$owner', '$region', '$province', '$cityMunicipality', '$barangay', '$street', '$squareMeter', '$overlandDescription', '$ownershipMode', '$ownerTitle', '$receiver', '$email', '$mobile', '$targetFile' )";
+$uploadedFile1 = $_FILES['inp_uploadfile1']['name'];
+$targetFile1 = $uploadDir . basename($uploadedFile1);
+
+$uploadedFile2 = $_FILES['inp_uploadfile2']['name'];
+$targetFile2 = $uploadDir . basename($uploadedFile2);
+
+$uploadedFile3 = $_FILES['inp_uploadfile3']['name'];
+$targetFile3 = $uploadDir . basename($uploadedFile3);
 
 
+if (move_uploaded_file($_FILES['inp_uploadfile1']['tmp_name'], $targetFile1)) {}
+if (move_uploaded_file($_FILES['inp_uploadfile2']['tmp_name'], $targetFile2)) {}
+if (move_uploaded_file($_FILES['inp_uploadfile3']['tmp_name'], $targetFile3)) {}
+
+$sql = "INSERT INTO t_applications ( req_firstName, req_lastName, req_owner, req_region, req_province, req_citymun, req_brgy, req_street, req_sqrmeter, req_overland, req_mode, req_ownertitle, req_receiver, req_email, req_mobile, req_ref_file_1, req_ref_file_2, req_ref_file_3, req_status, req_date, req_accid) VALUES ( '$firstName', '$lastName', '$owner', '$region', '$province', '$cityMunicipality', '$barangay', '$street', '$squareMeter', '$overlandDescription', '$ownershipMode', '$ownerTitle', '$receiver', '$email', '$mobile', '$targetFile1', '$targetFile2', '$targetFile3', 'Pending', '".date('Y-m-d')."', '".$_SESSION['id']."')";
 if ($conn->query($sql) === TRUE) {
     //echo "<br> Data saved successfully!";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
-// if (move_uploaded_file($_FILES['inp_uploadfile1']['tmp_name'], $targetFile)) {
-//     echo "File uploaded successfully!<br>";
-
-//     $sql = "INSERT INTO your_table_name (first_name, last_name, owner, region, province, city_municipality, barangay, street, square_meter, overland_description, ownership_mode, owner_title, receiver, email, mobile, file_reference) VALUES ('$firstName', '$lastName', '$owner', '$region', '$province', '$cityMunicipality', '$barangay', '$street', '$squareMeter', '$overlandDescription', '$ownershipMode', '$ownerTitle', '$receiver', '$email', '$mobile', '$targetFile')";
-
-//     if ($conn->query($sql) === TRUE) {
-//         echo "<br> Data saved successfully!";
-//     } else {
-//         echo "Error: " . $sql . "<br>" . $conn->error;
-//     }
-// } else {
-//     echo "File upload failed.";
-// }
-
 // Close the database connection
 $conn->close();
+
+$msg = 'This is to inform you that your request has been received and is currently being processed. We will notify you once your request has been approved and completed.';
+
+$name = $_POST['inp_lastName'] . ', ' . $_POST['inp_firstName'];
+$office = 'Municipal Planning and Development Office';
+
+$body = [
+    'name' => $name,
+    'email' => $email,
+    'status' => 'Pending',
+    'message' => $msg,
+    'office' => $office
+];
+
+$ch = curl_init('https://send-email.portalto.cloud/api/mpdo/');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($body));
+curl_setopt($ch, CURLOPT_POST, 1);
+$response = curl_exec($ch);
+curl_close($ch);
+
 ?>
 
 <section class="py-5">

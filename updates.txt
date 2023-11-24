@@ -1,0 +1,4 @@
+1. Add Status "Completed" -> Done Transaction
+2. Add Confirmation Box
+3. Provide Logs
+	- Every Transaction

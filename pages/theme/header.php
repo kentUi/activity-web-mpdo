@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php session_start(); ?>
 <?php 
+session_start();
 // if(!isset($_SESSION['loginID'])){
 //     //header('location: ./?login');
 // }
@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Planning and Development Office</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,6 +25,7 @@
         <div class="container px-0">
             <?php
             if (isset($_SESSION['loginID'])) {
+                if($_SESSION['typeID'] == 1){
                 ?>
                 <a class="navbar-brand" href="index.html">
                     <img src="./assets/lgu.png" class="img" height="80" alt="">
@@ -33,6 +34,19 @@
                     </span>
                 </a>
                 <?php
+                }else{
+                    ?>
+                    <a class="navbar-brand" href="index.html">
+                        <img src="./assets/lgu.png" class="img" height="80" alt="">
+                        <span style="position: absolute;" class="fw-bolder text-dark pt-2 px-2">
+                            <b style="color: #000; letter-spacing: 2px">Municipal Planning and Development Office </b><br>
+                            <small class="fw-normal" style="color: #5b0f8d; letter-spacing: 2px">
+                                Office of the Municipality of Tagoloan, Misamis Oriental
+                            </small>
+                        </span>
+                    </a>
+                    <?php
+                }
             } else {
                 ?>
                 <a class="navbar-brand" href="index.html">
@@ -60,7 +74,7 @@
                         require('./config/database.php');
 
                         $request = '';
-                        $sql = "SELECT count(*) as i FROM t_applications WHERE req_status = ''";
+                        $sql = "SELECT count(*) as i FROM t_applications WHERE req_status = 'Pending'";
 
                         $result = $conn->query($sql);
 
@@ -77,8 +91,7 @@
 
                         $conn->close();
 
-
-
+                        if($_SESSION['typeID'] == 1){
                         ?>
                         <li class="nav-item">
                             <a class="nav-link" href="?dashboard">
@@ -89,7 +102,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="?list">
+                            <a class="nav-link" href="?applications">
                                 <button class="btn btn-round btn-default" style="letter-spacing: 1px">
                                     <span class="bi bi-folder-symlink" style="font-size: 18px"></span>
                                     Applications <span class="badge bg-danger">
@@ -99,18 +112,18 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="?manage">
                                 <button class="btn btn-round btn-default" style="letter-spacing: 1px">
                                     <span class="bi bi-people" style="font-size: 18px"></span>
-                                    Manage Accounts
+                                    Management
                                 </button>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="?generate-report">
                                 <button class="btn btn-round btn-default" style="letter-spacing: 1px">
-                                    <span class="bi bi-person" style="font-size: 18px"></span>
-                                    My Profile
+                                    <span class="bi bi-download" style="font-size: 18px"></span>
+                                    Reports
                                 </button>
                             </a>
                         </li>
@@ -123,29 +136,57 @@
                             </a>
                         </li>
                         <?php
+                        }else{
+                            ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="?member">
+                                <button class="btn btn-round btn-default" style="letter-spacing: 1px">
+                                    <span class="bi bi-cloud-haze2" style="font-size: 18px"></span>
+                                    Dashboard
+                                </button>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="?member">
+                                <button class="btn btn-round btn-default" style="letter-spacing: 1px">
+                                    <span class="bi bi-grid" style="font-size: 18px"></span>
+                                    Settings
+                                </button>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="app/auth.php?logout">
+                                <button class="btn btn-round btn-default" style="letter-spacing: 1px">
+                                    <span class="bi bi-power" style="font-size: 18px"></span>
+                                    Logout
+                                </button>
+                            </a>
+                        </li>
+                        <?php
+                        }
                     } else {
                         ?>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <button class="btn btn-round btn-default" style="letter-spacing: 1px">
                                     <span class="bi bi-house-fill" style="font-size: 18px"></span>
                                     Home
                                 </button>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="?">
-                                <button class="btn btn-round btn-warning" style="letter-spacing: 1px">
-                                    <span class="bi bi-folder-fill" style="font-size: 18px"></span>
-                                    Request Cert.
-                                </button>
-                            </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link" href="?login">
                                 <button class="btn btn-round btn-default" style="letter-spacing: 1px">
                                     <span class="bi bi-unlock-fill" style="font-size: 18px"></span>
                                     Sign-in
+                                </button>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="?register">
+                                <button class="btn btn-round btn-warning" style="letter-spacing: 1px">
+                                    <span class="bi bi-pencil-fill" style="font-size: 18px"></span>
+                                    Sign-up
                                 </button>
                             </a>
                         </li>
