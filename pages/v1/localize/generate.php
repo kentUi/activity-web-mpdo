@@ -80,7 +80,7 @@
                                         <tbody>
                                             <?php
                                             require('./config/database.php');
-
+                                            error_reporting(0);
                                             if (isset($_GET['filter'])) {
                                                 $search = $_GET['filter'];
                                                 if ($search == "All") {

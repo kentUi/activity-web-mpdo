@@ -11,6 +11,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <?php
+                        error_reporting(0);
                         if (isset($_GET['type'])) {
                             $type = $_GET['type'];
                             if (isset($_GET['filter'])) {
