@@ -18,7 +18,7 @@ if (isset($_GET['s'])) {
 } elseif (isset($_GET['zone'])) {
     include('./pages/client/zone-form.php');
 } elseif (isset($_GET['localize'])) {
-    include('./pages/localize-form.php');
+    include('./pages/client/localize-form.php');
 } elseif (isset($_GET['print-zoning'])) {
     include('./pages/print/print-zoning.php');
 } elseif (isset($_GET['manage-account'])) {

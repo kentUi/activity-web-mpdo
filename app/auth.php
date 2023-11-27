@@ -19,16 +19,34 @@ if (isset($_POST['register'])) {
     $row = $result->fetch_assoc();
 
     if ($row['i'] > 0) {
-        header('location: ./?register&exist');
+        ?>
+        <script>window.location.href = './?register&exist'</script>
+        <?php
     } else {
         $query = "INSERT INTO t_accounts(acc_fname, acc_lname, acc_email, acc_password,acc_type) VALUES('$fname', '$lname','$user','$pwd','0')";
         $conn->query($query);
 
+        $sql = "SELECT count(*) as i, acc_type, acc_fname, acc_lname, acc_id, acc_email FROM t_accounts WHERE acc_email = '$user' AND acc_password = '$pwd'";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+
         session_start();
         $_SESSION['emailID'] = $user;
         $_SESSION['loginID'] = uniqid();
+
+        $_SESSION['typeID'] = $row['acc_type'];
+        $_SESSION['fname'] = $row['acc_fname'];
+        $_SESSION['lname'] = $row['acc_lname'];
+        $_SESSION['id'] = $row['acc_id'];
+
+        $date = date('Y-m-d h:i:s');
+
+        $logs = "[REGISTRATION] New Account Registered `" . $row['acc_fname'] . ' ' . $row['acc_lname'] . "` - `" . $row['acc_email'] . "` on " . date('F d, Y') . " at " . date('h:i:s A');
+        $logs_sql = "INSERT INTO t_logs(logs_details, created_at) VALUES('$logs','$date')";
+        $conn->query($logs_sql);
+
         ?>
-        <script>window.location.href = './?dashboard'</script>
+        <script>window.location.href = './?member'</script>
         <?php
     }
 
@@ -48,7 +66,7 @@ if (isset($_POST['register'])) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        
+
         if ($row['i'] != 0) {
             session_start();
             if ($pwd == md5('12345!')) {
@@ -159,6 +177,6 @@ if (isset($_GET['logout'])) {
 
     // Expire the session cookie by setting its expiration time to the past
     setcookie(session_name(), '', time() - 3600, '/');
-    
+
     header('location: ../?login');
 }

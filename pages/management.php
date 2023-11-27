@@ -29,8 +29,8 @@ $release_count = $rrw['i'];
 ?>
 <section class="py-4">
     <div class="container px-5">
-        <h1>ZONING APPLICATIONS</h1>
-        <p>YOU CAN CHECK THE LIST OF APPLICATION CERTIFICATE OF ZONING</p>
+        <h1>MANAGEMENT PANEL</h1>
+        <p>YOU CAN CHECK THE LOGS AND ACCOUNT SETTINGS HERE</p>
         <div class="row mt-3">
             <div class="col-md-12">
                 <div class="col-md-12">
@@ -76,10 +76,11 @@ $release_count = $rrw['i'];
                                             <div class="col-md-12">
                                                 <p class="p-2 px-3 text-white"
                                                     style="background-color: gray; text-align: left">
-                                                    System Logs
+                                                    Management
                                                 </p>
                                             </div>
                                             <div class="row">
+                                                <div class="col-lg-4 col-xl-6"></div>
                                                 <div class="col-lg-4 col-xl-3">
                                                     <center>
                                                         <a href="?manage-account"
@@ -92,7 +93,6 @@ $release_count = $rrw['i'];
                                                     </center>
                                                 </div>
 
-                                                <div class="col-lg-4 col-xl-6"></div>
                                                 <div class="col-lg-4 col-xl-3">
                                                     <center>
                                                         <a href="?list=pending" class="btn btn-default btn-block"

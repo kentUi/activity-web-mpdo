@@ -54,7 +54,7 @@ $release_count = $rrw['i'];
                                                         <a href="?zone"
                                                             class="btn btn-default btn-block"
                                                             style="width: 95%; border: 1px solid #e1e1e1;">
-                                                            <img src="assets/resume.png" height="65"
+                                                            <img src="/assets/resume.png" height="65"
                                                                 style="margin: 15px">
                                                             <br> Application for <br> Zoning Certificate
                                                         </a>
