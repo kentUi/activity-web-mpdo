@@ -26,92 +26,162 @@ $rrs = $conn->query($release);
 $rrw = $rrs->fetch_assoc();
 $release_count = $rrw['i'];
 
+$pending_corp = "SELECT count(*) as i FROM t_localize_info WHERE local_status = 'Pending'";
+$prs_corp = $conn->query($pending_corp);
+$prw_corp = $prs_corp->fetch_assoc();
+$pending_count_corp = $prw_corp['i'];
+
+$decline_corp = "SELECT count(*) as i FROM t_localize_info WHERE local_status = 'Declined'";
+$drs_corp = $conn->query($decline_corp);
+$drw_corp = $drs_corp->fetch_assoc();
+$decline_count_corp = $drw_corp['i'];
+
+$approved_corp = "SELECT count(*) as i FROM t_localize_info WHERE local_status = 'Approved'";
+$ars_corp = $conn->query($approved_corp);
+$arw_corp = $ars_corp->fetch_assoc();
+$approved_count_corp = $arw_corp['i'];
+
+$completed_corp = "SELECT count(*) as i FROM t_localize_info WHERE local_status = 'Completed'";
+$crs_corp = $conn->query($completed_corp);
+$crw_corp = $crs_corp->fetch_assoc();
+$completed_count_corp = $crw_corp['i'];
+
+$release_corp = "SELECT count(*) as i FROM t_localize_info WHERE local_status = 'Released'";
+$rrs_corp = $conn->query($release_corp);
+$rrw_corp = $rrs_corp->fetch_assoc();
+$release_count_corp = $rrw_corp['i'];
+
 ?>
+<style>
+    .type {
+        text-align: right;
+    }
+
+    .brn {
+        border-right: none;
+    }
+</style>
 <section class="py-4">
     <div class="container px-5">
         <div class="row">
             <div class="col-md-12">
                 <div class="bg-white rounded-4 py-4 px-4 px-md-4"
-                    style="border-left: 20px solid #ffb238; letter-spacing: 2px; max-height: 138px">
-                    <h2 class="text-dark"><b>
-                            <?= number_format($pending_count, 0) ?>
-                        </b></h2>
-                    <h6 class="text-dark">PENDING</h6>
-                    <img style="position: relative; top: -60px; left: 120px;" src="./assets/expired.png" class="img"
-                        height="60" alt="">
+                    style="border-left: 20px solid #E7E7E7; letter-spacing: 2px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3>Zoning Certicate</h3>
+                            <p>Figures for Zoning Clearance Application</p>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="type" width="150">Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="type"><b>Pending : </b></td>
+                                        <td>
+                                            <?= number_format($pending_count, 0) ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="type"><b>Approved : </b></td>
+                                        <td>
+                                            <?= number_format($approved_count, 0) ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="type"><b>Declined : </b></td>
+                                        <td>
+                                            <?= number_format($decline_count, 0) ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="type"><b>Completed : </b></td>
+                                        <td>
+                                            <?= number_format($completed_count, 0) ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="type"><b>Released : </b></td>
+                                        <td>
+                                            <?= number_format($release_count, 0) ?>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Localize Certicate</h3>
+                            <p>Figures for Localize Clearance Application</p>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="type" width="150">Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="type"><b>Pending : </b></td>
+                                        <td>
+                                            <?= number_format($pending_count_corp, 0) ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="type"><b>Approved : </b></td>
+                                        <td>
+                                            <?= number_format($approved_count_corp, 0) ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="type"><b>Declined : </b></td>
+                                        <td>
+                                            <?= number_format($decline_count_corp, 0) ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="type"><b>Completed : </b></td>
+                                        <td>
+                                            <?= number_format($completed_count_corp, 0) ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="type"><b>Released : </b></td>
+                                        <td>
+                                            <?= number_format($release_count_corp, 0) ?>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row mt-3">
-            
-            <div class="col-md-3">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="bg-white rounded-4 py-4 px-4 px-md-4"
-                            style="border-left: 20px solid #DC3545; letter-spacing: 2px; max-height: 138px">
-                            <h2 class="text-dark"><b>
-                                    <?= number_format($decline_count, 0) ?>
-                                </b></h2>
-                            <h6 class="text-dark">DECLINE</h6>
-                            <img style="position: relative; top: -60px; left: 120px;" src="./assets/denied.png"
-                                class="img" height="60" alt="">
-                        </div>
-                    </div>
-                    <div class="col-md-12 mt-3">
-                        <div class="bg-white rounded-4 py-4 px-4 px-md-4"
-                            style="border-left: 20px solid #3498db; letter-spacing: 2px; max-height: 138px">
-                            <h2 class="text-dark"><b>
-                                    <?= number_format($approved_count, 0) ?>
-                                </b></h2>
-                            <h6 class="text-dark">APPROVED</h6>
-                            <img style="position: relative; top: -60px; left: 120px;" src="./assets/checkbox.png"
-                                class="img" height="60" alt="">
-                        </div>
-                    </div>
-                    <div class="col-md-12 mt-3">
-                        <div class="bg-white rounded-4 py-4 px-4 px-md-4"
-                            style="border-left: 20px solid #cbe558; letter-spacing: 2px; max-height: 138px">
-                            <h2 class="text-dark"><b>
-                                    <?= number_format($completed_count, 0) ?>
-                                </b></h2>
-                            <h6 class="text-dark" style="font-size: 15px">COMPLETED</h6>
-                            <img style="position: relative; top: -60px; left: 120px;" src="./assets/goal.png"
-                                class="img" height="55" alt="">
-                        </div>
-                    </div>
-                    <div class="col-md-12 mt-3">
-                        <div class="bg-white rounded-4 py-4 px-4 px-md-4"
-                            style="border-left: 20px solid #2ecc71; letter-spacing: 2px; max-height: 138px">
-                            <h2 class="text-dark"><b>
-                                    <?= number_format($release_count, 0) ?>
-                                </b></h2>
-                            <h6 class="text-dark">RELEASED</h6>
-                            <img style="position: relative; top: -60px; left: 120px;" src="./assets/done.png"
-                                class="img" height="60" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="col-md-12">
-                    <div class="card" style="min-height: 600px">
+                    <div class="card" style="min-height: 200px">
                         <div class="card-header" style="text-transform: uppercase; letter-spacing: 2px;">List of Request
+                            (Zoning Certicate)
                         </div>
                         <div class="card-body">
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Complete name</th>
+                                        <th>Applicant</th>
+                                        <th>Address</th>
                                         <th width="180">Date Request</th>
                                         <th width="120" class="text-center">Status</th>
-                                        <th width="200" class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     require('./config/database.php');
-                                    $sql = "SELECT *FROM t_applications INNER JOIN ph_citymun ON req_citymun = citymunCode INNER JOIN ph_brgy ON req_brgy = brgyCode";
+                                    $sql = "SELECT *FROM t_applications INNER JOIN ph_citymun ON req_citymun = citymunCode INNER JOIN ph_brgy ON req_brgy = brgyCode ORDER BY req_id DESC LIMIT 0,20";
 
                                     $result = $conn->query($sql);
 
@@ -129,25 +199,119 @@ $release_count = $rrw['i'];
                                                 <td>
                                                     <?= $row["req_lastName"] . ', ' . $row["req_firstName"] ?>
                                                 </td>
-
+                                                <td>
+                                                    <?= $row["citymunDesc"] . ', ' . $row["brgyDesc"] ?>
+                                                </td>
                                                 <td>
                                                     <?= date_format(date_create($row['req_date']), 'F d, Y') ?>
                                                 </td>
                                                 <td class="text-center">
                                                     <?= $row['req_status'] ?>
                                                 </td>
-                                                <td class="text-center">
-                                                    <a href="?zoning&id=<?= $row['req_id'] ?>"
-                                                        class="btn btn-success btn-sm">View</a>
-                                                    <!-- <button data-bs-toggle="modal" data-bs-target="#myModal"
-                                                    class="btn btn-success btn-sm"
-                                                    onclick="view(3, <?= $row['req_id'] ?>)">View</button> -->
-                                                </td>
                                             </tr>
                                             <?php
                                         }
                                     } else {
                                         echo "No results found.";
+                                    }
+
+                                    $conn->close();
+                                    ?>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 mt-4">
+                <div class="col-md-12">
+                    <div class="card" style="min-height: 200px">
+                        <div class="card-header" style="text-transform: uppercase; letter-spacing: 2px;">List of Request
+                            (Locatonal Certicate)
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Corporation</th>
+                                        <th>Address</th>
+                                        <th width="180">Date Request</th>
+                                        <th width="100" class="text-center">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    require('./config/database.php');
+                                    if (isset($_GET['list-localize'])) {
+                                        $list = $_GET['list-localize'];
+                                        if (isset($_GET['search'])) {
+                                            $search = $_GET['search'];
+                                        } else {
+                                            $search = '';
+                                        }
+
+                                        $sql = "SELECT * FROM t_localize_info INNER JOIN ph_citymun ON local_citymun = citymunCode INNER JOIN ph_brgy ON local_brgy = brgyCode WHERE local_status LIKE '$list' AND (local_applicant LIKE '%$search%' OR local_corporation LIKE '%$search%')";
+                                    } else {
+                                        $sql = "SELECT * FROM t_localize_info INNER JOIN ph_citymun ON local_citymun = citymunCode INNER JOIN ph_brgy ON local_brgy = brgyCode";
+                                    }
+
+
+                                    $result = $conn->query($sql);
+
+                                    if (!$result) {
+                                        die("Query failed: " . $conn->error);
+                                    }
+                                    $num = 1;
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            ?>
+                                            <tr>
+                                                <td>
+                                                    <?= $num++ ?>.
+                                                </td>
+                                                <td>
+                                                    <?= $row["local_corporation"] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $row["citymunDesc"] . ', ' . $row["brgyDesc"] ?>
+                                                </td>
+                                                <td>
+                                                    <?= date_format(date_create($row['local_date']), 'F d, Y') ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <center>
+                                                        <?php
+                                                        if ($row['local_status'] == 'Pending') {
+                                                            ?>
+                                                            <span class="">Pending</span>
+                                                            <?php
+                                                        } elseif ($row['local_status'] == 'Approved') {
+                                                            ?>
+                                                            <span class="">Approved</span>
+                                                            <?php
+                                                        } elseif ($row['local_status'] == 'Declined') {
+                                                            ?>
+                                                            <span class="">Declined</span>
+                                                            <?php
+                                                        } elseif ($row['local_status'] == 'Completed') {
+                                                            ?>
+                                                            <span class="">Completed</span>
+                                                            <?php
+                                                        } elseif ($row['local_status'] == 'Released') {
+                                                            ?>
+                                                            <span class="">Released</span>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </center>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                        }
+                                    } else {
+                                        //echo 'No results found. <b style="color: red">"' . $search . '" </b><hr>';
                                     }
 
                                     $conn->close();

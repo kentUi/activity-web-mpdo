@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php 
+<?php
 session_start();
 // if(!isset($_SESSION['loginID'])){
 //     //header('location: ./?login');
 // }
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,16 +26,16 @@ session_start();
         <div class="container px-0">
             <?php
             if (isset($_SESSION['loginID'])) {
-                if($_SESSION['typeID'] == 1){
-                ?>
-                <a class="navbar-brand" href="index.html">
-                    <img src="./assets/lgu.png" class="img" height="80" alt="">
-                    <span style="position: absolute;" class="fw-bolder text-dark pt-3 px-2">
-                        <b style="color: #000; letter-spacing: 2px; font-size: 32px">M.P.D.O </b>
-                    </span>
-                </a>
-                <?php
-                }else{
+                if ($_SESSION['typeID'] == 1) {
+                    ?>
+                    <a class="navbar-brand" href="index.html">
+                        <img src="./assets/lgu.png" class="img" height="80" alt="">
+                        <span style="position: absolute;" class="fw-bolder text-dark pt-3 px-2">
+                            <b style="color: #000; letter-spacing: 2px; font-size: 32px">M.P.D.O </b>
+                        </span>
+                    </a>
+                    <?php
+                } else {
                     ?>
                     <a class="navbar-brand" href="index.html">
                         <img src="./assets/lgu.png" class="img" height="80" alt="">
@@ -73,96 +74,92 @@ session_start();
                         <?php
                         require('./config/database.php');
 
-                        $request = '';
-                        $sql = "SELECT count(*) as i FROM t_applications WHERE req_status = 'Pending'";
+                        $pending_localize = "SELECT count(*) as i FROM t_localize_info WHERE local_status = 'Pending'";
+                        $prs_localize = $conn->query($pending_localize);
+                        $prw_localize = $prs_localize->fetch_assoc();
+                        $pending_count_localize = $prw_localize['i'];
 
-                        $result = $conn->query($sql);
+                        $pending_zone = "SELECT count(*) as i FROM t_applications WHERE req_status = 'Pending'";
+                        $prs_zone = $conn->query($pending_zone);
+                        $prw_zone = $prs_zone->fetch_assoc();
+                        $pending_count_zone = $prw_zone['i'];
 
-                        if (!$result) {
-                            die("Query failed: " . $conn->error);
-                        }
-
-                        if ($result->num_rows > 0) {
-                            $row = $result->fetch_assoc();
-                            $request = $row['i'];
-                        } else {
-                            echo "No results found.";
-                        }
+                        $request = $pending_count_localize + $pending_count_zone;
 
                         $conn->close();
 
-                        if($_SESSION['typeID'] == 1){
-                        ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="?dashboard">
-                                <button class="btn btn-round btn-default" style="letter-spacing: 1px">
-                                    <span class="bi bi-cloud-haze2" style="font-size: 18px"></span>
-                                    Dashboard
-                                </button>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="?applications">
-                                <button class="btn btn-round btn-default" style="letter-spacing: 1px">
-                                    <span class="bi bi-folder-symlink" style="font-size: 18px"></span>
-                                    Applications <span class="badge bg-danger">
-                                        <?= $request ?>
-                                    </span>
-                                </button>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="?manage">
-                                <button class="btn btn-round btn-default" style="letter-spacing: 1px">
-                                    <span class="bi bi-people" style="font-size: 18px"></span>
-                                    Management
-                                </button>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="?generate-report">
-                                <button class="btn btn-round btn-default" style="letter-spacing: 1px">
-                                    <span class="bi bi-download" style="font-size: 18px"></span>
-                                    Reports
-                                </button>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="app/auth.php?logout">
-                                <button class="btn btn-round btn-default" style="letter-spacing: 1px">
-                                    <span class="bi bi-power" style="font-size: 18px"></span>
-                                    Logout
-                                </button>
-                            </a>
-                        </li>
-                        <?php
-                        }else{
+                        if ($_SESSION['typeID'] == 1) {
                             ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="?member">
-                                <button class="btn btn-round btn-default" style="letter-spacing: 1px">
-                                    <span class="bi bi-cloud-haze2" style="font-size: 18px"></span>
-                                    Dashboard
-                                </button>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="?member">
-                                <button class="btn btn-round btn-default" style="letter-spacing: 1px">
-                                    <span class="bi bi-grid" style="font-size: 18px"></span>
-                                    Settings
-                                </button>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="app/auth.php?logout">
-                                <button class="btn btn-round btn-default" style="letter-spacing: 1px">
-                                    <span class="bi bi-power" style="font-size: 18px"></span>
-                                    Logout
-                                </button>
-                            </a>
-                        </li>
-                        <?php
+                            <li class="nav-item">
+                                <a class="nav-link" href="?dashboard">
+                                    <button class="btn btn-round btn-default" style="letter-spacing: 1px">
+                                        <span class="bi bi-cloud-haze2" style="font-size: 18px"></span>
+                                        Dashboard
+                                    </button>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="?applications">
+                                    <button class="btn btn-round btn-default" style="letter-spacing: 1px">
+                                        <span class="bi bi-folder-symlink" style="font-size: 18px"></span>
+                                        Applications <span class="badge bg-danger">
+                                            <?= $request ?>
+                                        </span>
+                                    </button>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="?manage">
+                                    <button class="btn btn-round btn-default" style="letter-spacing: 1px">
+                                        <span class="bi bi-people" style="font-size: 18px"></span>
+                                        Management
+                                    </button>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="?generate-report">
+                                    <button class="btn btn-round btn-default" style="letter-spacing: 1px">
+                                        <span class="bi bi-download" style="font-size: 18px"></span>
+                                        Reports
+                                    </button>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="app/auth.php?logout">
+                                    <button class="btn btn-round btn-default" style="letter-spacing: 1px">
+                                        <span class="bi bi-power" style="font-size: 18px"></span>
+                                        Logout
+                                    </button>
+                                </a>
+                            </li>
+                            <?php
+                        } else {
+                            ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="?member">
+                                    <button class="btn btn-round btn-default" style="letter-spacing: 1px">
+                                        <span class="bi bi-cloud-haze2" style="font-size: 18px"></span>
+                                        Dashboard
+                                    </button>
+                                </a>
+                            </li>
+                            <!-- <li class="nav-item">
+                                <a class="nav-link" href="?member">
+                                    <button class="btn btn-round btn-default" style="letter-spacing: 1px">
+                                        <span class="bi bi-grid" style="font-size: 18px"></span>
+                                        Settings
+                                    </button>
+                                </a>
+                            </li> -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="app/auth.php?logout">
+                                    <button class="btn btn-round btn-default" style="letter-spacing: 1px">
+                                        <span class="bi bi-power" style="font-size: 18px"></span>
+                                        Logout
+                                    </button>
+                                </a>
+                            </li>
+                            <?php
                         }
                     } else {
                         ?>

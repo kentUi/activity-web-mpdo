@@ -43,7 +43,10 @@ $release_count = $rrw['i'];
                                 </div>
                                 <div class="col-md-10">
                                     <br>
-                                    <h3>Welcome Back! <?= $_SESSION['fname'] ?> <?= $_SESSION['lname'] ?></h3>
+                                    <h3>Welcome Back!
+                                        <?= $_SESSION['fname'] ?>
+                                        <?= $_SESSION['lname'] ?>
+                                    </h3>
                                     <p>You can request a clearance to MPDO.</p>
                                     <hr>
                                     <div class="row">
@@ -51,8 +54,7 @@ $release_count = $rrw['i'];
                                             <div class="row mt-3 mb-4">
                                                 <div class="col-lg-6 col-xl-6">
                                                     <center>
-                                                        <a href="?zone"
-                                                            class="btn btn-default btn-block"
+                                                        <a href="?zone" class="btn btn-default btn-block"
                                                             style="width: 95%; border: 1px solid #e1e1e1;">
                                                             <img src="/assets/resume.png" height="65"
                                                                 style="margin: 15px">
@@ -62,8 +64,7 @@ $release_count = $rrw['i'];
                                                 </div>
                                                 <div class="col-lg-6 col-xl-6">
                                                     <center>
-                                                        <a href="?localize"
-                                                            class="btn btn-block btn-default"
+                                                        <a href="?localize" class="btn btn-block btn-default"
                                                             style="width: 95%; border: 1px solid #e1e1e1">
                                                             <img src="assets/job.png" height="65" style="margin: 15px">
                                                             <br>
@@ -95,7 +96,7 @@ $release_count = $rrw['i'];
                                                 <?php
                                                 require('./config/database.php');
                                                 $id = $_SESSION['id'];
-                                                $sql = "SELECT *FROM t_applications INNER JOIN ph_citymun ON req_citymun = citymunCode INNER JOIN ph_brgy ON req_brgy = brgyCode WHERE req_accid = '$id'";
+                                                $sql = "SELECT * FROM t_applications INNER JOIN ph_citymun ON req_citymun = citymunCode INNER JOIN ph_brgy ON req_brgy = brgyCode WHERE req_accid = '$id'";
 
                                                 $result = $conn->query($sql);
 
@@ -111,7 +112,7 @@ $release_count = $rrw['i'];
                                                                 <?= $num++ ?>.
                                                             </td>
                                                             <td>
-                                                            Zoning Certificate
+                                                                Zoning Certificate
                                                             </td>
 
                                                             <td>
@@ -123,9 +124,6 @@ $release_count = $rrw['i'];
                                                             <td class="text-center">
                                                                 <a href="?zoning&id=<?= $row['req_id'] ?>"
                                                                     class="btn btn-success btn-sm">View</a>
-                                                                <!-- <button data-bs-toggle="modal" data-bs-target="#myModal"
-                                                    class="btn btn-success btn-sm"
-                                                    onclick="view(3, <?= $row['req_id'] ?>)">View</button> -->
                                                             </td>
                                                         </tr>
                                                         <?php
@@ -159,7 +157,7 @@ $release_count = $rrw['i'];
                                             <tbody>
                                                 <?php
                                                 require('./config/database.php');
-                                                $sql = "SELECT *FROM t_applications INNER JOIN ph_citymun ON req_citymun = citymunCode INNER JOIN ph_brgy ON req_brgy = brgyCode WHERE req_accid = 'x'";
+                                                $sql = "SELECT * FROM t_localize_info INNER JOIN ph_citymun ON local_citymun = citymunCode INNER JOIN ph_brgy ON local_brgy = brgyCode WHERE local_accid = '$id'";
 
                                                 $result = $conn->query($sql);
 
@@ -175,21 +173,18 @@ $release_count = $rrw['i'];
                                                                 <?= $num++ ?>.
                                                             </td>
                                                             <td>
-                                                                <?= $row["req_lastName"] . ', ' . $row["req_firstName"] ?>
+                                                                Locational Certificate
                                                             </td>
 
                                                             <td>
-                                                                <?= date_format(date_create($row['req_date']), 'F d, Y') ?>
+                                                                <?= date_format(date_create($row['local_date']), 'F d, Y') ?>
                                                             </td>
                                                             <td class="text-center">
-                                                                <?= $row['req_status'] ?>
+                                                                <?= $row['local_status'] ?>
                                                             </td>
                                                             <td class="text-center">
-                                                                <a href="?zoning&id=<?= $row['req_id'] ?>"
+                                                            <a href="?local&id=<?= $row['local_id'] ?>"
                                                                     class="btn btn-success btn-sm">View</a>
-                                                                <!-- <button data-bs-toggle="modal" data-bs-target="#myModal"
-                                                    class="btn btn-success btn-sm"
-                                                    onclick="view(3, <?= $row['req_id'] ?>)">View</button> -->
                                                             </td>
                                                         </tr>
                                                         <?php

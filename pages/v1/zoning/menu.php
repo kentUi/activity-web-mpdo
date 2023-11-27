@@ -31,6 +31,10 @@ $release_count = $rrw['i'];
     <div class="container px-5">
         <h1>ZONING APPLICATIONS</h1>
         <p>YOU CAN CHECK THE LIST OF APPLICATION CERTIFICATE OF ZONING</p>
+        <a href="/?applications" class="btn btn-default" style="margin-right: 10px;">
+            <span class="bi bi-arrow-left"></span> &nbsp;
+            Return
+        </a>
         <div class="row mt-3">
             <div class="col-md-12">
                 <div class="col-md-12">
@@ -51,7 +55,7 @@ $release_count = $rrw['i'];
                                             <div class="col-lg-4 col-xl-7"></div>
                                             <div class="col-lg-4 col-xl-5">
                                                 <center>
-                                                    <a href="?list=pending" class="btn btn-default btn-block"
+                                                    <a href="?list-zoning=pending" class="btn btn-default btn-block"
                                                         style="width: 95%; border: 1px solid #e1e1e1;">
                                                         <img src="assets/folder.png" height="65" style="margin: 15px">
                                                         <br> Pending Applications <br>
@@ -72,7 +76,7 @@ $release_count = $rrw['i'];
                                                 </div>
                                                 <div class="col-lg-4 col-xl-6">
                                                     <center>
-                                                        <a href="?list=approved" class="btn btn-block btn-default"
+                                                        <a href="?list-zoning=approved" class="btn btn-block btn-default"
                                                             style="width: 95%; border: 1px solid #e1e1e1">
                                                             <img src="assets/verified.png" height="65"
                                                                 style="margin: 15px">
@@ -85,7 +89,7 @@ $release_count = $rrw['i'];
                                                 </div>
                                                 <div class="col-lg-4 col-xl-6">
                                                     <center>
-                                                        <a href="?list=declined" class="btn btn-block btn-default"
+                                                        <a href="?list-zoning=declined" class="btn btn-block btn-default"
                                                             style="width: 95%; border: 1px solid #e1e1e1">
                                                             <img src="assets/decline.png" height="65"
                                                                 style="margin: 15px">
@@ -112,7 +116,7 @@ $release_count = $rrw['i'];
                                 <div class="col-lg-4 col-xl-6"></div>
                                 <div class="col-lg-4 col-xl-3">
                                     <center>
-                                        <a href="?list=completed" class="btn btn-default btn-block"
+                                        <a href="?list-zoning=completed" class="btn btn-default btn-block"
                                             style="width: 95%; border: 1px solid #e1e1e1;">
                                             <img src="assets/done (1).png" height="65" style="margin: 15px">
                                             <br> Completed Applications <br>
@@ -124,7 +128,7 @@ $release_count = $rrw['i'];
                                 </div>
                                 <div class="col-lg-4 col-xl-3">
                                     <center>
-                                        <a href="?list=released" class="btn btn-block btn-default"
+                                        <a href="?list-zoning=released" class="btn btn-block btn-default"
                                             style="width: 95%; border: 1px solid #e1e1e1">
                                             <img src="assets/documentation.png" height="65" style="margin: 15px">
                                             <br> Released Applications <br>

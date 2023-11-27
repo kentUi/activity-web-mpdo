@@ -80,26 +80,36 @@ $release_count = $rrw['i'];
                                                 </p>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-4 col-xl-6"></div>
                                                 <div class="col-lg-4 col-xl-3">
                                                     <center>
-                                                        <a href="?manage-account"
-                                                            class="btn btn-default btn-block"
+                                                        <a href="?manage-account" class="btn btn-default btn-block"
                                                             style="width: 95%; border: 1px solid #e1e1e1;">
                                                             <img src="assets/1071942.png" height="65"
                                                                 style="margin: 15px">
-                                                            <br> Account Management
+                                                            <br> Account <br> Management
                                                         </a>
                                                     </center>
                                                 </div>
-
+                                                <div class="col-lg-4 col-xl-3"></div>
                                                 <div class="col-lg-4 col-xl-3">
                                                     <center>
-                                                        <a href="?list=pending" class="btn btn-default btn-block"
+                                                        <a href="?master-zoning" class="btn btn-default btn-block"
                                                             style="width: 95%; border: 1px solid #e1e1e1;">
                                                             <img src="assets/1187525.png" height="65"
                                                                 style="margin: 15px">
-                                                            <br> Master List
+                                                            <br> <b>Master List</b> <br>
+                                                            Zoning Certificate
+                                                        </a>
+                                                    </center>
+                                                </div>
+                                                <div class="col-lg-4 col-xl-3">
+                                                    <center>
+                                                        <a href="?master-localize" class="btn btn-default btn-block"
+                                                            style="width: 95%; border: 1px solid #e1e1e1;">
+                                                            <img src="assets/1187525.png" height="65"
+                                                                style="margin: 15px">
+                                                            <br> <b>Master List</b> <br>
+                                                            Locational Certificate
                                                         </a>
                                                     </center>
                                                 </div>

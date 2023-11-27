@@ -1,19 +1,19 @@
 <section class="py-4">
     <div class="container px-5">
-        <h1>APPLICATION FOR ZONING CERTIFICATION</h1>
-        <p>APPLICATION FOR LOCATIONAL CLEARANCE/ CERTIFICATE OF ZONING COMPLIANCE NAME OF APPLICANT</p>
-        <a href="/?applications" class="btn btn-default" style="margin-right: 10px;">
-                                                    <span class="bi bi-arrow-left"></span> &nbsp;
-                                                    Return
-                                                </a>
+        <h1>LOCATIONAL CERTIFICATION</h1>
+        <p>APPLICATION FOR LOCATIONAL CLEARANCE OF APPLICANT</p>
+        <a href="/?menu-localize" class="btn btn-default" style="margin-right: 10px;">
+            <span class="bi bi-arrow-left"></span> &nbsp;
+            Return
+        </a>
         <div class="row mt-4">
             <div class="col-md-12">
                 <div class="card" style="min-height: 440px">
                     <div class="card-header" style="text-transform: uppercase; letter-spacing: 2px;">
-                        <form action="/?list" method="GET">
+                        <form action="/?list-localize" method="GET">
                             <div class="row">
                                 <div class="col-md-9">
-                                    <input type="hidden" name="list" value="<?= $_GET['list'] ?>">
+                                    <input type="hidden" name="list-localize" value="<?= $_GET['list-localize'] ?>">
                                     <input name="search" placeholder="Search application here.." type="text"
                                         class="form-control">
                                 </div>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="card-body">
 
-                    <?php
+                        <?php
                         if (isset($_GET['success'])) {
                             ?>
                             <div class="alert alert-success"><b>Success!</b> Application has been updated.</div>
@@ -38,8 +38,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Complete name</th>
-                                    <th>Address</th>
+                                    <th>Corporation name</th>
                                     <th width="180">Date Request</th>
                                     <th width="100" class="text-center">Status</th>
                                     <th width="200" class="text-center">Action</th>
@@ -49,17 +48,17 @@
                                 <?php
                                 require('./config/database.php');
 
-                                if (isset($_GET['list'])) {
-                                    $list = $_GET['list'];
-                                    if(isset($_GET['search'])){
+                                if (isset($_GET['list-localize'])) {
+                                    $list = $_GET['list-localize'];
+                                    if (isset($_GET['search'])) {
                                         $search = $_GET['search'];
-                                    }else{
+                                    } else {
                                         $search = '';
                                     }
-                                    
-                                    $sql = "SELECT *FROM t_applications INNER JOIN ph_citymun ON req_citymun = citymunCode INNER JOIN ph_brgy ON req_brgy = brgyCode WHERE req_status LIKE '$list' AND (req_firstName LIKE '%$search%' OR req_lastName LIKE '%$search%' OR req_owner LIKE '%$search%')";
+
+                                    $sql = "SELECT * FROM t_localize_info INNER JOIN ph_citymun ON local_citymun = citymunCode INNER JOIN ph_brgy ON local_brgy = brgyCode WHERE local_status LIKE '$list' AND (local_applicant LIKE '%$search%' OR local_corporation LIKE '%$search%')";
                                 } else {
-                                    $sql = "SELECT *FROM t_applications INNER JOIN ph_citymun ON req_citymun = citymunCode INNER JOIN ph_brgy ON req_brgy = brgyCode";
+                                    $sql = "SELECT * FROM t_localize_info INNER JOIN ph_citymun ON local_citymun = citymunCode INNER JOIN ph_brgy ON local_brgy = brgyCode";
                                 }
 
 
@@ -77,56 +76,50 @@
                                                 <?= $num++ ?>.
                                             </td>
                                             <td>
-                                                <?= $row["req_lastName"] . ', ' . $row["req_firstName"] ?>
+                                                <?= $row["local_corporation"] ?>
                                             </td>
                                             <td>
-                                                <?= $row["citymunDesc"] . ', ' . $row["brgyDesc"] ?>
-                                            </td>
-
-                                            <td>
-                                                <?= date_format(date_create($row['req_date']), 'F d, Y') ?>
+                                                <?= date_format(date_create($row['local_date']), 'F d, Y') ?>
                                             </td>
                                             <td class="text-center">
                                                 <center>
-                                            <?php
-                                            if ($row['req_status'] == 'Pending') {
-                                                ?>
-                                                <span class="badge bg-warning">Pending</span>
-                                                <?php
-                                            } elseif ($row['req_status'] == 'Approved') {
-                                                ?>
-                                                <span class="badge bg-primary">Approved</span>
-                                                <?php
-                                            } elseif ($row['req_status'] == 'Declined') {
-                                                ?>
-                                                <span class="badge bg-danger">Declined</span>
-                                                <?php
-                                            } elseif ($row['req_status'] == 'Completed') {
-                                                ?>
-                                                <span class="badge bg-info">Completed</span>
-                                                <?php
-                                            } elseif ($row['req_status'] == 'Released') {
-                                                ?>
-                                                <span class="badge bg-success">Released</span>
-                                                <?php
-                                            }
-                                            ?>
-                                            </center>
+                                                    <?php
+                                                    if ($row['local_status'] == 'Pending') {
+                                                        ?>
+                                                        <span class="badge bg-warning">Pending</span>
+                                                        <?php
+                                                    } elseif ($row['local_status'] == 'Approved') {
+                                                        ?>
+                                                        <span class="badge bg-primary">Approved</span>
+                                                        <?php
+                                                    } elseif ($row['local_status'] == 'Declined') {
+                                                        ?>
+                                                        <span class="badge bg-danger">Declined</span>
+                                                        <?php
+                                                    } elseif ($row['local_status'] == 'Completed') {
+                                                        ?>
+                                                        <span class="badge bg-info">Completed</span>
+                                                        <?php
+                                                    } elseif ($row['local_status'] == 'Released') {
+                                                        ?>
+                                                        <span class="badge bg-success">Released</span>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </center>
                                             </td>
                                             <td class="text-center">
-                                                <!-- <button class="btn btn-danger btn-sm">Delete</button> -->
-                                                <a href="?zoning&id=<?= $row['req_id'] ?>"
-                                                        class="btn btn-success btn-sm">
-                                                        <span class="bi bi-eye"></span> &nbsp;
-                                                        View
-                                                    </a>
+                                                <a href="?local&id=<?= $row['local_id'] ?>" class="btn btn-success btn-sm">
+                                                    <span class="bi bi-eye"></span> &nbsp;
+                                                    View
+                                                </a>
 
                                             </td>
                                         </tr>
                                         <?php
                                     }
                                 } else {
-                                    echo 'No results found. <b style="color: red">"' . $search . '" </b><hr>';
+                                    //echo 'No results found. <b style="color: red">"' . $search . '" </b><hr>';
                                 }
 
                                 $conn->close();
@@ -140,7 +133,7 @@
         </div>
     </div>
 </section>
- 
+
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
@@ -166,7 +159,7 @@
 
     <script>
         function view(type, id, status) {
-            if(status === "Approved"){
+            if (status === "Approved") {
                 document.getElementById('step_1').style.display = 'none';
                 document.getElementById('step_2').style.display = 'block';
             }

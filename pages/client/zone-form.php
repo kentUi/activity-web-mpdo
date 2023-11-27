@@ -212,7 +212,7 @@
                         </div>
 
                         <div class="d-grid">
-                            <button class="btn btn-success btn-lg" disabled id="submitButton" type="submit">
+                            <button class="btn btn-success btn-lg" name="btnzone" disabled id="submitButton" type="submit">
                                 Submit Application
                             </button>
                         </div>

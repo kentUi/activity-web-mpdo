@@ -10,9 +10,9 @@
                     <h4>Do you really want to <br> approve this application ?</h4>
                     <br>
                     <?php
-                    $data_url = 'id=' . $_GET['id'] . '&name=' . $row['req_firstName'] . ' ' . $row['req_lastName'];
+                    $data_url = 'id=' . $_GET['id'] . '&name=' . $row['local_corporation'];
                     ?>
-                    <a href="./app/api/api.php?zone-approval&<?= $data_url ?>" class="btn btn-success btn-sm"
+                    <a href="./app/api/api.php?localize-approval&<?= $data_url ?>" class="btn btn-success btn-sm"
                         style="margin-right: 10px;">
                         Yes, Please proceed
                     </a>
@@ -48,9 +48,9 @@
                     function reason() {
                         var reason = document.getElementById('reason').value;
                         <?php
-                        $data_url_decline = 'id=' . $_GET['id'] . '&name=' . $row['req_firstName'] . ' ' . $row['req_lastName'];
+                        $data_url_decline = 'id=' . $_GET['id'] . '&name=' . $row['local_corporation'] ;
                         ?>
-                        window.location.href = './app/api/api.php?zone-decline&<?= $data_url_decline ?>&reason=' + reason;
+                        window.location.href = './app/api/api.php?localize-decline&<?= $data_url_decline ?>&reason=' + reason;
                     }
                 </script>
             </div>
@@ -70,15 +70,14 @@
                     <h4>Are you sure that the application <br> is completed and ready ?</h4>
                     <br>
                     <?php
-                    $data_url = 'id=' . $_GET['id'] . '&name=' . $row['req_firstName'] . ' ' . $row['req_lastName'];
+                    $data_url = 'id=' . $_GET['id'] . '&name=' . $row['local_corporation'];
                     ?>
                     <div style="padding-left: 45px; padding-right: 45px; display: none;" id="schedule">
-                        <input type="date" min="<?= date('Y-m-') . (date('d') + 1) ?>"
-                            value="<?= date('Y-m-') . (date('d') + 1) ?>" class="form-control"
-                            style="text-align: center; border: 1px solid #e1e1e1;" id="date">
+                        <input type="date" min="<?= date('Y-m-') . (date('d') + 1) ?>" value="<?= date('Y-m-') . (date('d') + 1) ?>" class="form-control" style="text-align: center; border: 1px solid #e1e1e1;" id="date">
                         <small style="text-transform: uppercase; letter-spacing: 1px;">Assign Schedule</small>
                         <span class="d-grid">
-                            <button onclick="confirm()" class="btn btn-success btn-sm mt-2">
+                            <button onclick="confirm()"
+                                class="btn btn-success btn-sm mt-2">
                                 Confirm & Submit
                             </button>
                             <button onclick="back()" class="btn btn-danger btn-sm mt-1">
@@ -108,12 +107,12 @@
                         }
 
                         function confirm() {
-                            var date = document.getElementById('date').value;
-                            <?php
-                            $data_url_complete = 'id=' . $_GET['id'] . '&name=' . $row['req_firstName'] . ' ' . $row['req_lastName'];
-                            ?>
-                            window.location.href = './app/api/api.php?zone-complete&<?= $data_url_complete ?>&date=' + date;
-                        }
+                        var date = document.getElementById('date').value;
+                        <?php
+                        $data_url_complete = 'id=' . $_GET['id'] . '&name=' . $row['local_corporation'];
+                        ?>
+                        window.location.href = './app/api/api.php?localize-complete&<?= $data_url_complete ?>&date=' + date;
+                    }
                     </script>
                 </center>
                 <br>
@@ -134,9 +133,9 @@
                     <h4>The Documents <br> has been release ?</h4>
                     <br>
                     <?php
-                    $data_url = 'id=' . $_GET['id'] . '&name=' . $row['req_firstName'] . ' ' . $row['req_lastName'];
+                    $data_url = 'id=' . $_GET['id'] . '&name=' . $row['local_corporation'] ;
                     ?>
-                    <a href="./app/api/api.php?zone-release&<?= $data_url ?>" class="btn btn-success btn-sm"
+                    <a href="./app/api/api.php?localize-release&<?= $data_url ?>" class="btn btn-success btn-sm"
                         style="margin-right: 10px;">
                         Yes, Please proceed
                     </a>
@@ -149,6 +148,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Verify -->
 
@@ -167,7 +167,7 @@
                     <div id="found" style="display: none;">
                         <img src="/assets/done.png" height="100" class="mb-3">
                         <h4><b>Record Found!</b></h4>
-                        Reference: [<a style="text-decoration: none;" target="_blank" href="?zoning&id=<?= $link_data_id ?>">Previous Request</a>]
+                        Reference: [<a style="text-decoration: none;" target="_blank" href="?local&id=<?= $link_data_id ?>">Previous Request</a>]
                         <br><br>
                     </div>
                     <div id="not_found" style="display: none;">

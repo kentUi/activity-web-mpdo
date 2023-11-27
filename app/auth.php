@@ -133,6 +133,33 @@ if (isset($_POST['register'])) {
     } else {
         header('location: ./?login&reset&invalid');
     }
+} elseif (isset($_POST['forgot'])) {
+ 
+    $name = 'Client';
+    $email = $_POST['inp_email'];
+    $office = 'Municipal Planning and Development Office';
+
+    $link = 'http://localhost/'.'?forgot&token=' . hash('SHA256', $email) . '&reset&forge=' . $email;
+
+    $msg = 'We received a request to reset your password for your account. If you did not make this request, please ignore this email. <br><br>  Click on the following link to reset your password: ';
+
+    $body = [
+        'name' => $name,
+        'email' => $email,
+        'status' => 'Reset Password',
+        'message' => $msg,
+        'office' => $office
+    ];
+
+    $ch = curl_init('https://send-email.portalto.cloud/api/mpdo/');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($body));
+    curl_setopt($ch, CURLOPT_POST, 1);
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    header('location: ../?forgot&ss');
+
 } elseif (isset($_POST['reset-password-admin'])) {
 
     require('../config/database.php');

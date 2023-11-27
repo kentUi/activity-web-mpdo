@@ -129,7 +129,7 @@ $conn->close();
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="type"><b>Baranagay : </b></td>
+                                        <td class="type"><b>Barangay : </b></td>
                                         <td class="brn">
                                             <?= $row['brgyDesc'] ?>
                                         </td>
@@ -201,6 +201,23 @@ $conn->close();
                                                         style="text-decoration: none" href="#">Latest Tax Clearance form
                                                         the Municaplity Treasurer`s Ofiice</a></li>
                                             </ul>
+                                            <?php 
+                                            if($row['req_status'] == 'Declined'){
+                                                require('./config/database.php');
+
+                                                $sql_res = "SELECT * FROM t_reasons INNER JOIN t_accounts ON rs_by = acc_id WHERE rs_appid = '$id' AND rs_type = 'zoning'";
+
+                                                $result_res = $conn->query($sql_res);
+                                                $row_res = $result_res->fetch_assoc();
+                                                ?>
+                                                <hr>
+                                                 <p><b style="color: red;">REASON :</b> (Specific Details) <br> <small> Declined By: <?= $row_res['acc_fname'] ?> <?= $row_res['acc_lname'] ?></small></p>
+                                                <div class="jumbotron">
+                                                <p><b>Reason</b>: <?= $row_res['rs_details'] ?> </p> 
+                                                </div>
+                                                <?php
+                                            }
+                                           ?>
                                         </blockquote>
                                         <hr>
                                         <center>
@@ -208,7 +225,7 @@ $conn->close();
                                             if($_SESSION['typeID'] == 1){
                                             if ($row['req_status'] == 'Approved') {
                                                 ?>
-                                                <a href="/?list=<?= $row['req_status'] ?>" class="btn btn-default"
+                                                <a href="/?list-zoning=<?= $row['req_status'] ?>" class="btn btn-default"
                                                     style="margin-right: 10px;">
                                                     <span class="bi bi-arrow-left"></span> &nbsp;
                                                     Return
@@ -226,7 +243,7 @@ $conn->close();
                                                 <?php
                                             } elseif ($row['req_status'] == 'Completed') {
                                                 ?>
-                                                <a href="/?list=<?= $row['req_status'] ?>" class="btn btn-default"
+                                                <a href="/?list-zoning=<?= $row['req_status'] ?>" class="btn btn-default"
                                                     style="margin-right: 10px;">
                                                     <span class="bi bi-arrow-left"></span> &nbsp;
                                                     Return
@@ -239,7 +256,7 @@ $conn->close();
                                                 <?php
                                             } elseif ($row['req_status'] == 'Pending')  {
                                                 ?>
-                                                <a href="/?list=<?= $row['req_status'] ?>" class="btn btn-default"
+                                                <a href="/?list-zoning=<?= $row['req_status'] ?>" class="btn btn-default"
                                                     style="margin-right: 10px;">
                                                     <span class="bi bi-arrow-left"></span> &nbsp;
                                                     Return
@@ -254,14 +271,23 @@ $conn->close();
                                                     <span class="bi bi-trash"></span> &nbsp;
                                                     Decline Application
                                                 </button>
+                                                &ensp; OR &ensp;
+                                                <button class="btn btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#verify" onclick="verify_id()">
+                                                    <span class="bi bi-search"></span> &nbsp;
+                                                    Verify from Master List
+                                                </button>
                                             <?php }else{
-                                                ?>
-                                                <a href="/?list=<?= $row['req_status'] ?>" class="btn btn-default"
+                                                 if (!isset($_GET['type'])) {
+
+                                                    ?>
+                                                    <a href="/?list-zoning=<?= $row['req_status'] ?>" class="btn btn-default"
                                                     style="margin-right: 10px;">
                                                     <span class="bi bi-arrow-left"></span> &nbsp;
                                                     Return
                                                 </a>
-                                                <?php
+                                                    <?php
+                                                }
                                             } 
                                             }else{
                                                 ?>
@@ -285,5 +311,44 @@ $conn->close();
     </div>
 </section>
 <?php
+require('./config/database.php');
+$ref_fame = $row['req_firstName'];
+$ref_lname = $row['req_lastName'];
+$sql_ref = "SELECT * FROM t_applications WHERE req_firstName like '$ref_fame' and req_lastName like '$ref_lname' AND req_status = 'Released' ORDER BY req_id DESC";
+$result_ref = $conn->query($sql_ref);
+
+if (!$result_ref) {
+    die("Query failed: " . $conn->error);
+}
+
+if ($result_ref->num_rows > 0) {
+    $row_ref = $result_ref->fetch_assoc();
+    $link_data_id = $row_ref['req_id'];
+    ?><script>
+    function displayForm2() {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('found').style.display = 'block';
+    }
+
+    function verify_id(){
+        setTimeout(displayForm2, 3000);
+    }
+    </script>
+    <?php
+} else {
+    $link_data_id = '0';
+    ?><script>
+    function displayForm2() {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('not_found').style.display = 'block';
+    }
+
+    function verify_id(){
+        setTimeout(displayForm2, 3000);
+    }
+    </script>
+    <?php
+}
+
 require('./pages/v1/zoning/dialog.php');
 ?>

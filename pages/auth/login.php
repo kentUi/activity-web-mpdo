@@ -102,7 +102,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#" style="text-decoration: none">Forget Password ?</a>
+                            <a href="?forgot" style="text-decoration: none">Forget Password ?</a>
                             <hr>
                             <!-- Submit Button-->
                             <div class="d-grid">

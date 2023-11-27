@@ -13,7 +13,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" id="name" required name="   " type="text"
+                                    <input class="form-control" id="name" required name="inp_applicant" type="text"
                                         placeholder="Enter your name..." data-sb-validations="required" />
                                     <label for="name">Name of Applicant</label>
                                 </div>
@@ -71,8 +71,8 @@
                         <div class="row mt-2">
                             <div class="col-md-6">
                                 <div class="form-floating mb-6">
-                                    <select id="tx_region" required name="inp_region_corp" class="form-control"
-                                        onchange="DISPLAY_PROVINCE(this.value)">
+                                    <select id="tx_region_corp" required name="inp_region_corp" class="form-control"
+                                        onchange="DISPLAY_PROVINCE_CORP(this.value)">
                                         <option value="" disabled selected>-</option>
                                     </select>
                                     <label for="name">Region</label>
@@ -80,8 +80,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating mb-6">
-                                    <select id="tx_province" required name="inp_province_corp" class="form-control"
-                                        onchange="DISPLAY_CITYMUN(this.value)">
+                                    <select id="tx_province_corp" required name="inp_province_corp" class="form-control"
+                                        onchange="DISPLAY_CITYMUN_CORP(this.value)">
                                         <option value="" disabled selected>-</option>
                                     </select>
                                     <label for="name">Province</label>
@@ -91,8 +91,8 @@
                         <div class="row mt-3 mb-6">
                             <div class="col-md-6">
                                 <div class="form-floating mb-6">
-                                    <select id="tx_citymun" required name="inp_citymun_corp" class="form-control"
-                                        onchange="DISPLAY_BARANGAY(this.value)">
+                                    <select id="tx_citymun_corp" required name="inp_citymun_corp" class="form-control"
+                                        onchange="DISPLAY_BARANGAY_CORP(this.value)">
                                         <option value="" disabled selected>-</option>
                                     </select>
                                     <label for="name">City/Municipality</label>
@@ -100,7 +100,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating mb-6">
-                                    <select id="tx_brgy" required name="inp_brgy_corp" class="form-control">
+                                    <select id="tx_brgy_corp" required name="inp_brgy_corp" class="form-control">
                                         <option value="" disabled selected>-</option>
                                     </select>
                                     <label for="name">Baranagay</label>
@@ -130,9 +130,9 @@
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
                                     <select name="inp_projectnature" required id="" class="form-control">
-                                        <option value="">New Development</option>
-                                        <option value="">Existing</option>
-                                        <option value="">Others (Specific)</option>
+                                        <option>New Development</option>
+                                        <option>Existing</option>
+                                        <option>Others (Specific)</option>
                                     </select>
                                     <label for="name">Project Nature</label>
                                 </div>
@@ -149,8 +149,8 @@
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
                                     <select name="inp_projecttenure" required id="" class="form-control">
-                                        <option value="">Permanent</option>
-                                        <option value="">Temporary (Specify number of years)</option>
+                                        <option>Permanent</option>
+                                        <option>Temporary (Specify number of years)</option>
                                     </select>
                                     <label for="name">Project Tenure</label>
                                 </div>
@@ -170,9 +170,9 @@
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
                                     <select name="inp_overland" required id="" class="form-control">
-                                        <option value="">Owner</option>
-                                        <option value="">Lessee</option>
-                                        <option value="">Others (Specific)</option>
+                                        <option>Owner</option>
+                                        <option>Lessee</option>
+                                        <option>Others (Specific)</option>
                                     </select>
                                     <label for="name">Right over Land</label>
                                 </div>
@@ -190,13 +190,13 @@
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
                                     <select name="inp_projectsite" required id="" class="form-control">
-                                        <option value="">Residential</option>
-                                        <option value="">Institution</option>
-                                        <option value="">Commercial</option>
-                                        <option value="">Industrial</option>
-                                        <option value="">cant/idle</option>
-                                        <option value="">Agricultural (Specify kind of crop)</option>
-                                        <option value="">Others (Specific)</option>
+                                        <option>Residential</option>
+                                        <option>Institution</option>
+                                        <option>Commercial</option>
+                                        <option>Industrial</option>
+                                        <option>cant/idle</option>
+                                        <option>Agricultural (Specify kind of crop)</option>
+                                        <option>Others (Specific)</option>
                                     </select>
                                     <label for="name">Existing Land Uses of Project Site</label>
                                 </div>
@@ -282,7 +282,7 @@
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="name" name="inp_c_actiontaken" type="text"
                                         placeholder="Enter your name..." data-sb-validations="required" />
-                                    <label for="name">Action Taken</label>
+                                    <label for="name">C. Action Taken</label>
                                 </div>
                             </div>
                         </div>
@@ -300,7 +300,7 @@
                         </div>
                         <hr>
                         <h4>Requirements <strong>(Photo Copy only)</strong></h4>
-                        Note: <i>You can upload multiple files here..</i>
+                        <!-- Note: <i>You can upload multiple files here..</i> -->
                         <hr>
                         <label for="file-upload1" class="custom-file-upload">
                             <b>PROOF OF OWNERSHOP OVER THE LAND</b> to be used; <br>
@@ -313,25 +313,25 @@
                                 <li>D. Authorization to use the land from the landowner</li>
                             </ul>
                         </label>
-                        <input id="file-upload1" name="inp_uploadfile1" class="form-control mt-2" type="file" />
+                        <input name="inp_uploadfile1" id="file-upload1" class="form-control mt-2" type="file" />
                         <hr>
                         <label for="file-upload" class="custom-file-upload">
                             <b>VICINITY MAP</b> (or Location Plan) showing existing land uses with 100.00 meter radius
                             (for project of local significance) and one (1) kilometer radius (for project of national
                             significance) form the boundary of project side;
                         </label>
-                        <input id="file-upload" name="inp_uploadfile2" class="form-control mt-2" type="file" />
+                        <input name="inp_uploadfile2" id="file-upload" class="form-control mt-2" type="file" />
                         <hr>
                         <label for="file-upload" class="custom-file-upload">
                             <b>SITE DEVELOPMENT PLAN</b> <br> (or Lot Plan) showing lot area boundaries and dimensions of
                             proposed improvements within the project site;
                         </label>
-                        <input id="file-upload" name="inp_uploadfile3" class="form-control mt-2" type="file" />
+                        <input name="inp_uploadfile3" id="file-upload" class="form-control mt-2" type="file" />
                         <hr>
                         <label for="file-upload" class="custom-file-upload">
                             <b>FLOOR PLAN</b> of hte proposed/existing project;
                         </label>
-                        <input id="file-upload" name="inp_uploadfile4" class="form-control mt-2" type="file" />
+                        <input name="inp_uploadfile4" id="file-upload" class="form-control mt-2" type="file" />
                         <hr>
                         <label for="file-upload" class="custom-file-upload">
                             <b>CERIFICATE OF ZONING</b> <br> from the City/Municipality Planning and Development Office, as
@@ -343,22 +343,22 @@
                             <b>BILL OF MATERIAL/ESTIMATED OF THE PROJECT</b> <br> (cost of construction including
                             machineries/equipments if any) signed by engineer or achitech;
                         </label>
-                        <input name="inp_uploadfile5" id="file-upload" class="form-control mt-2" type="file" />
+                        <input name="inp_uploadfile6" id="file-upload" class="form-control mt-2" type="file" />
                         <hr>
                         <label for="file-upload" class="custom-file-upload">
                             <b>BARANGAY CONSTRUCTION CLEARANCE</b> (Concerned Barangay)
                         </label>
-                        <input name="inp_uploadfile6" id="file-upload" class="form-control mt-2" type="file" />
+                        <input name="inp_uploadfile7" id="file-upload" class="form-control mt-2" type="file" />
                         <hr>
                         <label for="file-upload" class="custom-file-upload">
                             <b>LINE & GRADE CLEARANCE</b> (Engineering Office)
                         </label>
-                        <input name="inp_uploadfile7" id="file-upload" class="form-control mt-2" type="file" />
+                        <input name="inp_uploadfile8" id="file-upload" class="form-control mt-2" type="file" />
                         <hr>
                         <label for="file-upload" class="custom-file-upload">
                             <b>COPY OF BUILDING PERMIT</b> (to on-going and existing project and TPZ Monitored project)
                         </label>
-                        <input name="inp_uploadfile8" id="file-upload" class="form-control mt-2" type="file" />
+                        <input name="inp_uploadfile9" id="file-upload" class="form-control mt-2" type="file" />
                         <hr>
                         <div class="form-inline">
                             <input type="checkbox" id="data-privacy" onclick="confirm()" class="checkbox" style="transform: scale(1.5);">
@@ -372,7 +372,7 @@
                         </div>
 
                         <div class="d-grid">
-                            <button class="btn btn-success btn-lg" disabled id="submitButton" type="submit">
+                            <button class="btn btn-success btn-lg" name="btnlocalize" disabled id="submitButton" type="submit">
                                 Submit Application
                             </button>
                         </div>
@@ -402,6 +402,98 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
 <script src="./assets/ph-address.js"></script>
+<script>
+    function confirm(){
+        var agree = document.getElementById('data-privacy');
+        var btn = document.getElementById('submitButton');
+
+        if(agree.checked){
+            btn.disabled = false;
+        }else{
+            btn.disabled = true;
+        }
+    }
+</script>
+<script>
+    function LIST_OF_REGIONS_CORP(){
+	$.ajax({
+		url: 'https://api.portaltoo.cloud/ph-location/region/',
+		method: 'POST',
+		data: {'Request': 'Region'},
+		success: function(response){
+			var region = document.getElementById("tx_region_corp");
+			var option = document.createElement("option");
+			for(i = 0; i < response.length; i++){
+				region.add(new Option(response[i].name, response[i].code));
+			}
+			console.log(response);
+		},
+		error: function(err){
+			console.log(err);
+		}
+	});
+}
+
+function DISPLAY_PROVINCE_CORP(code){
+	$.ajax({
+		url: 'https://api.portaltoo.cloud/ph-location/province/' + code,
+		method: 'POST',
+		data: {'Request': 'Province'},
+		success: function(response){
+			var province = document.getElementById("tx_province_corp");
+			var option = document.createElement("option");
+			$('#tx_province_corp option').remove();
+			for(i = 0; i < response.length; i++){
+				province.add(new Option(response[i].name, response[i].code));
+			}
+		},
+		error: function(err){
+			console.log(err);
+		}
+	});
+}
+
+
+function DISPLAY_CITYMUN_CORP(code){
+	$.ajax({
+		url: 'https://api.portaltoo.cloud/ph-location/citymun/' + code,
+		method: 'POST',
+		data: {'Request': 'City/Municipality'},
+		success: function(response){
+			var citymun = document.getElementById("tx_citymun_corp");
+			var option = document.createElement("option");
+			$('#tx_citymun_corp option').remove();
+			for(i = 0; i < response.length; i++){
+				citymun.add(new Option(response[i].name, response[i].code));
+			}
+		},
+		error: function(err){
+			console.log(err);
+		}
+	});
+}
+
+function DISPLAY_BARANGAY_CORP(code){
+	$.ajax({
+		url: 'https://api.portaltoo.cloud/ph-location/brgy/' + code,
+		method: 'POST',
+		data: {'Request': 'Brgy'},
+		success: function(response){
+			var citymun = document.getElementById("tx_brgy_corp");
+			var option = document.createElement("option");
+			$('#tx_brgy_corp option').remove();
+			for(i = 0; i < response.length; i++){
+				citymun.add(new Option(response[i].name, response[i].code));
+			}
+		},
+		error: function(err){
+			console.log(err);
+		}
+	});
+}
+
+LIST_OF_REGIONS_CORP();
+</script>
 </body>
 
 </html>
