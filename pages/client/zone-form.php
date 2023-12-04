@@ -13,7 +13,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" id="name" required readonly name="inp_firstName"
+                                    <input required class="form-control" id="name" required readonly name="inp_firstName"
                                         type="text" placeholder="Enter your name..." data-sb-validations="required"
                                         value="<?= $_SESSION['fname'] ?>" />
                                     <label for="name">First Name</label>
@@ -24,7 +24,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" id="name" required readonly name="inp_lastName"
+                                    <input required class="form-control" id="name" required readonly name="inp_lastName"
                                         type="text" placeholder="Enter your name..." data-sb-validations="required"
                                         value="<?= $_SESSION['lname'] ?>" />
                                     <label for="name">Last Name</label>
@@ -37,11 +37,21 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" id="name" required name="inp_owner" type="text"
+                                    <input required class="form-control" id="name" required name="inp_owner" type="text"
                                         placeholder="Enter your name..." data-sb-validations="required" />
-                                    <label for="name">Name of Owner (Based on Tax Declaration or Lot Title)</label>
-                                    <div class="invalid-feedback" data-sb-feedback="name:required">A Name of Owner
-                                        (Based on Tax Declaration or Lot Title) is required.
+                                    <label for="name">Name of Owner</label>
+                                    <div class="invalid-feedback" data-sb-feedback="name:required">A Name of Owner is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-floating mb-3">
+                                    <input required class="form-control" id="name" required name="inp_taxdec" type="text"
+                                        placeholder="Enter your Tax Declaration..." data-sb-validations="required" />
+                                    <label for="name">Based on Tax Declaration or Lot Title</label>
+                                    <div class="invalid-feedback" data-sb-feedback="name:required">A Based on Tax Declaration or Lot Title is required.
                                     </div>
                                 </div>
                             </div>
@@ -49,7 +59,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-floating mb-6">
-                                    <select id="tx_region" required name="inp_region" class="form-control"
+                                    <select required id="tx_region" required name="inp_region" class="form-control"
                                         onchange="DISPLAY_PROVINCE(this.value)">
                                         <option value="" disabled selected>-</option>
                                     </select>
@@ -58,7 +68,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating mb-6">
-                                    <select id="tx_province" required name="inp_province" class="form-control"
+                                    <select required id="tx_province" required name="inp_province" class="form-control"
                                         onchange="DISPLAY_CITYMUN(this.value)">
                                         <option value="" disabled selected>-</option>
                                     </select>
@@ -70,7 +80,7 @@
                         <div class="row mt-3 mb-6">
                             <div class="col-md-6">
                                 <div class="form-floating mb-6">
-                                    <select id="tx_citymun" required name="inp_citymun" class="form-control"
+                                    <select required id="tx_citymun" required name="inp_citymun" class="form-control"
                                         onchange="DISPLAY_BARANGAY(this.value)">
                                         <option value="" disabled selected>-</option>
                                     </select>
@@ -79,7 +89,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating mb-6">
-                                    <select id="tx_brgy" required name="inp_brgy" class="form-control">
+                                    <select required id="tx_brgy" required name="inp_brgy" class="form-control">
                                         <option value="" disabled selected>-</option>
                                     </select>
                                     <label for="name">Baranagay</label>
@@ -90,7 +100,7 @@
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" id="name" name="inp_street" type="text"
+                                    <input required class="form-control" id="name" name="inp_street" type="text"
                                         placeholder="Enter your name..." data-sb-validations="required" />
                                     <label for="name">Street, Subd., Block, House #</label>
                                     <div class="invalid-feedback" data-sb-feedback="name:required">A Street, Subd.,
@@ -102,7 +112,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" id="name" required name="inp_sqrmeter" type="number"
+                                    <input required class="form-control" id="name" required name="inp_sqrmeter" type="number"
                                         placeholder="Enter your name..." data-sb-validations="required" />
                                     <label for="name">Total Area of Lot (in Square Meter)</label>
                                     <div class="invalid-feedback" data-sb-feedback="name:required">A Total Area of Lot
@@ -112,7 +122,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <select name="inp_overland" required id="" class="form-control">
+                                    <select required name="inp_overland" required id="" class="form-control">
                                         <option value="Owner">Owner</option>
                                         <option value="Lessee">Lessee</option>
                                         <option value="Others (Specific)">Others (Specific)</option>
@@ -125,7 +135,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-floating mb-3">
-                                    <select name="inp_mode" required id="" class="form-control">
+                                    <select required name="inp_mode" required id="" class="form-control">
                                         <option value="Pick-up">Pick-up</option>
                                         <option value="by Mail, Addressed">by Mail, Addressed</option>
                                         <option value="by E-Mail, Addressed">by E-Mail, Addressed</option>
@@ -136,7 +146,7 @@
 
                             <div class="col-md-3">
                                 <div class="form-floating mb-3">
-                                    <select name="inp_ownertitle" id="" class="form-control">
+                                    <select required name="inp_ownertitle" id="" class="form-control">
                                         <option value="Owner">Owner</option>
                                         <option value="Authorized Representative">Authorized Representative</option>
                                     </select>
@@ -145,7 +155,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" id="name" required name="inp_receiver" type="text"
+                                    <input required class="form-control" id="name" required name="inp_receiver" type="text"
                                         placeholder="Enter your name..." data-sb-validations="required" />
                                     <label for="name">Receiver Name</label>
                                     <div class="invalid-feedback" data-sb-feedback="name:required">A Receiver Name is
@@ -158,7 +168,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" id="email" required readonly name="inp_email"
+                                    <input required class="form-control" id="email" required readonly name="inp_email"
                                         type="email" placeholder="name@example.com" data-sb-validations="required,email"
                                         value="<?= $_SESSION['emailID'] ?>" />
                                     <label for="email">Email address</label>
@@ -170,7 +180,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" required name="inp_mobile" id="phone" type="tel"
+                                    <input required class="form-control" required name="inp_mobile" id="phone" type="tel"
                                         placeholder="(123) 456-7890" data-sb-validations="required" />
                                     <label for="phone">Phone number</label>
                                     <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is
@@ -187,21 +197,21 @@
                             geographic coordinates (WGS 84) of the estimated center of the property.lot and indicating
                             appropriate landmarks/Approved lot skecth plan or V037 from DENR X Land Department.
                         </label>
-                        <input id="file-upload1" name="inp_uploadfile1" class="form-control mt-2" type="file" />
+                        <input required id="file-upload1" name="inp_uploadfile1" class="form-control mt-2" type="file" />
                         <hr>
                         <label for="file-upload" class="custom-file-upload">
                             TCT (or any proof of ownership or right over the property) / Latest Tax Declaration form the
                             municipal Assesor`s Office.
                         </label>
-                        <input id="file-upload2" name="inp_uploadfile2" class="form-control mt-2" type="file" />
+                        <input required id="file-upload2" name="inp_uploadfile2" class="form-control mt-2" type="file" />
                         <hr>
                         <label for="file-upload" class="custom-file-upload">
                             Latest Tax Clearance form the Municaplity Treasurer`s Ofiice.
                         </label>
-                        <input id="file-upload3" name="inp_uploadfile3" class="form-control mt-2" type="file" />
+                        <input required id="file-upload3" name="inp_uploadfile3" class="form-control mt-2" type="file" />
                         <hr>
                         <div class="form-inline">
-                            <input type="checkbox" id="data-privacy" onclick="confirm()" class="checkbox" style="transform: scale(1.5);">
+                            <input required type="checkbox" id="data-privacy" onclick="confirm()" class="checkbox" style="transform: scale(1.5);">
                             <label for="data-privacy">By submitting this form, you agree that the information provided
                                 will be used for the sole purpose of <b>Application for Zoning Certificate</b>. Your data will be treated confidentially and will
                                 not be shared with third parties without your explicit consent.</label>

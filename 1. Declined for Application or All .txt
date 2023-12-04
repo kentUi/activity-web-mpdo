@@ -1,0 +1,8 @@
+(/) 1. Declined for Application or All Status
+(/) 2. Pending Click first Requirements Only
+(/) 3. Can't view the requirements after declined. Notification for Declined
+(/) 4. Print Out Page
+5. Separate : Name of Owner (Based on Tax Declaration or Lot Title) field
+(/) 6. Print Compress and Revert: http://localhost:7588/pages/print/sub/zoning.php?token=1
+7. Remove SMS
+8. 

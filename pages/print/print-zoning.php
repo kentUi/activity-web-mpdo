@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div class="card" style="min-height: 350px">
                     <div class="card-header" style="text-transform: uppercase; letter-spacing: 2px;">
-                    Preview: <a href="pages/print/sub/zoning.php?token=<?= $_GET['id'] ?>" target="_blank" rel="noopener noreferrer"> Print Document</a>
+                    Preview: <a href="pages/print/sub/print-now.php?token=<?= $_GET['id'] ?>" target="_blank" rel="noopener noreferrer"> Print Document</a>
                     </div>
                     <div class="card-body">
                         <?php 

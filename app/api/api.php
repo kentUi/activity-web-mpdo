@@ -46,7 +46,7 @@ if(isset($_GET['zone-decline'])){
     $logs_sql = "INSERT INTO t_logs(logs_details, created_at) VALUES('$logs','$date')";
     $conn->query($logs_sql);
 
-    $reason_sql = "INSERT INTO t_reasons(rs_appid, rs_details, rs_by, rs_type created_at) VALUES('$id','$reason','$date','$by','zoning')";
+    $reason_sql = "INSERT INTO t_reasons(rs_appid, rs_details, rs_by, rs_type,created_at) VALUES('$id','$reason','$by','zoning','$date')";
     $conn->query($reason_sql);
 
     $application = "UPDATE t_applications SET req_status = 'Declined', req_by = '". $row['acc_fname'] . ' ' . $row['acc_lname'] ."' WHERE req_id = '$id'";

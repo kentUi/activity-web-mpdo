@@ -5,6 +5,7 @@ if (isset($_POST['btnzone'])) {
     $firstName = $_POST['inp_firstName'];
     $lastName = $_POST['inp_lastName'];
     $owner = $_POST['inp_owner'];
+    $taxdec = $_POST['inp_taxdec'];
     $region = $_POST['inp_region'];
     $province = $_POST['inp_province'];
     $cityMunicipality = $_POST['inp_citymun'];
@@ -41,7 +42,7 @@ if (isset($_POST['btnzone'])) {
     if (move_uploaded_file($_FILES['inp_uploadfile3']['tmp_name'], $targetFile3)) {
     }
 
-    $sql = "INSERT INTO t_applications ( req_firstName, req_lastName, req_owner, req_region, req_province, req_citymun, req_brgy, req_street, req_sqrmeter, req_overland, req_mode, req_ownertitle, req_receiver, req_email, req_mobile, req_ref_file_1, req_ref_file_2, req_ref_file_3, req_status, req_date, req_accid) VALUES ( '$firstName', '$lastName', '$owner', '$region', '$province', '$cityMunicipality', '$barangay', '$street', '$squareMeter', '$overlandDescription', '$ownershipMode', '$ownerTitle', '$receiver', '$email', '$mobile', '$targetFile1', '$targetFile2', '$targetFile3', 'Pending', '" . date('Y-m-d') . "', '" . $_SESSION['id'] . "')";
+    $sql = "INSERT INTO t_applications ( req_firstName, req_lastName, req_owner, req_ownertaxdec, req_region, req_province, req_citymun, req_brgy, req_street, req_sqrmeter, req_overland, req_mode, req_ownertitle, req_receiver, req_email, req_mobile, req_ref_file_1, req_ref_file_2, req_ref_file_3, req_status, req_date, req_accid) VALUES ( '$firstName', '$lastName', '$owner', '$taxdec', '$region', '$province', '$cityMunicipality', '$barangay', '$street', '$squareMeter', '$overlandDescription', '$ownershipMode', '$ownerTitle', '$receiver', '$email', '$mobile', '$targetFile1', '$targetFile2', '$targetFile3', 'Pending', '" . date('Y-m-d') . "', '" . $_SESSION['id'] . "')";
     if ($conn->query($sql) === TRUE) {
         //echo "<br> Data saved successfully!";
     } else {
@@ -172,8 +173,7 @@ if (isset($_POST['btnzone'])) {
 
     $conn->close();
 
-}
-?>
+    ?>
     <section class="py-5">
         <div class="container px-5">
             <div class="bg-white rounded-4 py-5 px-4 px-md-5">
@@ -189,3 +189,8 @@ if (isset($_POST['btnzone'])) {
             </div>
         </div>
     </section>
+    <?php
+
+}
+?>
+    

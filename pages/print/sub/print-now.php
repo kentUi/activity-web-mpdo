@@ -30,11 +30,13 @@ $row = $result->fetch_assoc();
 
 ?>
 
-<body onload="<?= $load ?>">
+<body >
 <style>
     hr {
         border-color: #000 !important;
         background-color: #000;
+        margin-top: 1px;
+        margin-bottom: 1px;
     }
 </style>
 <center>
@@ -45,54 +47,52 @@ $row = $result->fetch_assoc();
         Municipality of Tagoloan <br>
         <b>Office of the Municipal Planning and Development Office</b>
     </p>
-    <h3><b><u>APPLICATION FORM FOR ZONING CERTIFICATION</u></b></h3>
+    <h4><b><u>APPLICATION FORM FOR ZONING CERTIFICATION</u></b></h4>
 </center>
 <div style="<?= $style_body ?>">
    
-    <b>1. Name of Applicant</b><br><br>
+    <b>1. Name of Applicant</b><br>
     <?= $row['req_lastName'] ?>,
     <?= $row['req_firstName'] ?>
     <hr>
-
-    <b>2. Address of Applicant</b><br><br>
+    <b>2. Address of Applicant</b><br>
     <?= $row["citymunDesc"] . ', ' . $row["brgyDesc"] ?>
     <hr>
 
-    <b>3. Name of Owner (Based on Tax Declaration or Lot Title)</b><br><br>
+    <b>3. Name of Owner (Based on Tax Declaration or Lot Title)</b><br>
     <?= $row["req_owner"] ?>
     <hr>
     
-    <b>4. Total Area of Lot (in Square Meter)</b><br><br>
+    <b>4. Total Area of Lot (in Square Meter)</b><br>
     <?= $row["req_sqrmeter"] ?> SQM
     <hr>
 
-    <b>5. Right over Land</b><br><br>
+    <b>5. Right over Land</b><br>
     <?= $row["req_overland"] ?>
     <hr>
     
-    <b>6. Mode of release of certification</b><br><br>
+    <b>6. Mode of release of certification</b><br>
     <?= $row["req_mode"] ?>
     <hr>
     
-    <b>7. Preferred mode of release of certification</b><br><br>
+    <b>7. Preferred mode of release of certification</b><br>
     <?= $row["req_mode"] ?>
     <hr>
     
     <div style="padding-left: 50px">
         <b>To</b><br>
-
         <?= $row["req_receiver"] ?>
         <hr>
     </div>
     <br>
 
-    <b>8. Signature of Applicant</b><br><br>
-    <?= $row["req_mode"] ?>
+    <b>8. Signature of Applicant</b><br>
+    
     <hr>
     
     <b>9. Signature of Owner</b><br><br>
     <hr>
-    <b>10. Requirements:</b><br><br>
+    <b>10. Requirements:</b><br>
     <div style="padding-left: 50px">
         <b>[ ️✔ ]</b>
         <div style="padding-left: 40px; position: relative; top: -22px; text-align: justify;">
@@ -109,7 +109,6 @@ $row = $result->fetch_assoc();
         <div style="padding-left: 40px; position: relative; top: -22px;">
             Latest Tax Clearance form the Municaplity Treasurer`s Ofiice.
         </div>
-        <br>
     </div>
     <b style="font-family: 'Arial'; ">Republic of the Philippines) <br>
         _________________________)</b> &emsp; S.S
@@ -121,17 +120,17 @@ $row = $result->fetch_assoc();
             of
             ________________________________, province of _________________________ affiant of exhibited to me his/her
             Residence Certificate No. _____________ issued at ___________________ on ___________________.
-            <br><br><br>
+            <br><br>
         </b>
-
 
         Doc. No. ____________ <br>
         Page No. ____________ <br>
+        <b style="float: right">NOTARY PUBLIC</b>
         Book No. ____________ <br>
-        Series No. ___________ <br>
+        Series No. ___________ 
     </p>
 
-    <center><b style="position: absolute; right: 200px; bottom: 60px">NOTARY PUBLIC</b></center>
+   
 </div>
 
 </body>

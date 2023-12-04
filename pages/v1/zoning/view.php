@@ -54,12 +54,15 @@ $conn->close();
                                 <?php
                                 if ($row['req_status'] == 'Completed') {
                                     ?>
-                                    <span style="right: 45px; top: 76px; position: absolute;">To be Claim at : <b
-                                        class="text-danger"><?= date_format(date_create($row['req_tobeclaim']), 'F d, Y') ?></b></span>
+                                    <span style="right: 45px; top: 76px; position: absolute;">To be Claim at :
+                                        <b class="text-danger">
+                                            <?= date_format(date_create($row['req_tobeclaim']), 'F d, Y') ?>
+                                        </b>
+                                    </span>
                                     <?php
                                 }
                                 ?>
-                                
+
 
                                 <table class="table table-bordered">
                                     <thead>
@@ -115,7 +118,13 @@ $conn->close();
                                     <tr>
                                         <td class="type"><b>Name of Owner :</b></td>
                                         <td class="brn">
-                                            <?= $row['req_lastName'] ?>
+                                            <?= $row['req_owner'] ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="type"><b>Tax Declaration :</b></td>
+                                        <td class="brn">
+                                            <?= $row['req_ownertaxdec'] ?>
                                         </td>
                                     </tr>
                                     <tr>
@@ -189,20 +198,59 @@ $conn->close();
                                         <blockquote style="padding-left: 25px;">
                                             <p>Requirements <strong>(Photo Copy only)</strong></p>
                                             <ul>
-                                                <li><a target="_blank" href="/<?= $row['req_ref_file_1'] ?>"
+                                                <li>
+                                                    <a target="_blank" onclick="checking_1(1)"
+                                                        href="/<?= $row['req_ref_file_1'] ?>"
                                                         style="text-decoration: none" href="#">Vicinity Map, Geographic
                                                         Coordinates (WGS 84) Or V037 from DENR X Land Department</a>
                                                 </li>
-                                                <li><a target="_blank" href="/<?= $row['req_ref_file_2'] ?>"
+                                                <li>
+                                                    <a target="_blank" onclick="checking_2(1)"
+                                                        href="/<?= $row['req_ref_file_2'] ?>"
                                                         style="text-decoration: none" href="#">TCT (proof of ownership
                                                         or
-                                                        right over the property) OR Latest Tax Declaration Form</a></li>
-                                                <li><a target="_blank" href="/<?= $row['req_ref_file_3'] ?>"
+                                                        right over the property) OR Latest Tax Declaration Form
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a target="_blank" onclick="checking_3(1)"
+                                                        href="/<?= $row['req_ref_file_3'] ?>"
                                                         style="text-decoration: none" href="#">Latest Tax Clearance form
-                                                        the Municaplity Treasurer`s Ofiice</a></li>
+                                                        the Municaplity Treasurer`s Ofiice
+                                                    </a>
+                                                </li>
                                             </ul>
-                                            <?php 
-                                            if($row['req_status'] == 'Declined'){
+                                            <script>
+                                                var validate_requirments_1 = 0;
+                                                var validate_requirments_2 = 0;
+                                                var validate_requirments_3 = 0;
+
+                                                function checking_1(num) {
+                                                    validate_requirments_1 = 1;
+                                                    checked();
+                                                }
+
+                                                function checking_2(num) {
+                                                    validate_requirments_2 = 1;
+                                                    checked();
+
+                                                }
+
+                                                function checking_3(num) {
+                                                    validate_requirments_3 = 1;
+                                                    checked();
+                                                }
+
+                                                function checked() {
+                                                    var opened = Number(validate_requirments_1) + Number(validate_requirments_2) + Number(validate_requirments_3);
+
+                                                    if (opened >= 3) {
+                                                        document.getElementById('checking_validation_first').style.display = 'block';
+                                                    }
+                                                }
+                                            </script>
+                                            <?php
+                                            if ($row['req_status'] == 'Declined') {
                                                 require('./config/database.php');
 
                                                 $sql_res = "SELECT * FROM t_reasons INNER JOIN t_accounts ON rs_by = acc_id WHERE rs_appid = '$id' AND rs_type = 'zoning'";
@@ -211,93 +259,100 @@ $conn->close();
                                                 $row_res = $result_res->fetch_assoc();
                                                 ?>
                                                 <hr>
-                                                 <p><b style="color: red;">REASON :</b> (Specific Details) <br> <small> Declined By: <?= $row_res['acc_fname'] ?> <?= $row_res['acc_lname'] ?></small></p>
+                                                <p><b style="color: red;">REASON :</b> (Specific Details) <br> <small>
+                                                        Declined By:
+                                                        <?= $row_res['acc_fname'] ?>
+                                                        <?= $row_res['acc_lname'] ?>
+                                                    </small></p>
                                                 <div class="jumbotron">
-                                                <p><b>Reason</b>: <?= $row_res['rs_details'] ?> </p> 
+                                                    <p><b>Reason</b>:
+                                                        <?= $row_res['rs_details'] ?>
+                                                    </p>
                                                 </div>
                                                 <?php
                                             }
-                                           ?>
+                                            ?>
                                         </blockquote>
                                         <hr>
                                         <center>
                                             <?php
-                                            if($_SESSION['typeID'] == 1){
-                                            if ($row['req_status'] == 'Approved') {
-                                                ?>
-                                                <a href="/?list-zoning=<?= $row['req_status'] ?>" class="btn btn-default"
-                                                    style="margin-right: 10px;">
-                                                    <span class="bi bi-arrow-left"></span> &nbsp;
-                                                    Return
-                                                </a>
-                                                <button class="btn btn-success" style="margin-right: 10px;"
-                                                    data-bs-toggle="modal" data-bs-target="#complete">
-                                                    <span class="bi bi-play"></span> &nbsp;
-                                                    The Application is Completed & Ready
-                                                </button>
-                                                <a href="?print-zoning&id=<?= $row['req_id'] ?>" target="_blank"
-                                                    class="btn btn-warning text-white">
-                                                    <span class="bi bi-printer"></span> &nbsp;
-                                                    Print Application
-                                                </a>
-                                                <?php
-                                            } elseif ($row['req_status'] == 'Completed') {
-                                                ?>
-                                                <a href="/?list-zoning=<?= $row['req_status'] ?>" class="btn btn-default"
-                                                    style="margin-right: 10px;">
-                                                    <span class="bi bi-arrow-left"></span> &nbsp;
-                                                    Return
-                                                </a>
-                                                <button class="btn btn-success" style="margin-right: 10px;"
-                                                    data-bs-toggle="modal" data-bs-target="#release">
-                                                    <span class="bi bi-save"></span> &nbsp;
-                                                    The Application is now released
-                                                </button>
-                                                <?php
-                                            } elseif ($row['req_status'] == 'Pending')  {
-                                                ?>
-                                                <a href="/?list-zoning=<?= $row['req_status'] ?>" class="btn btn-default"
-                                                    style="margin-right: 10px;">
-                                                    <span class="bi bi-arrow-left"></span> &nbsp;
-                                                    Return
-                                                </a>
-                                                <button class="btn btn-success" style="margin-right: 10px;"
-                                                    data-bs-toggle="modal" data-bs-target="#approval">
-                                                    <span class="bi bi-check"></span> &nbsp;
-                                                    Approve Application
-                                                </button>
-                                                <button class="btn btn-danger" data-bs-toggle="modal"
-                                                    data-bs-target="#decline">
-                                                    <span class="bi bi-trash"></span> &nbsp;
-                                                    Decline Application
-                                                </button>
-                                                &ensp; OR &ensp;
-                                                <button class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#verify" onclick="verify_id()">
-                                                    <span class="bi bi-search"></span> &nbsp;
-                                                    Verify from Master List
-                                                </button>
-                                            <?php }else{
-                                                 if (!isset($_GET['type'])) {
-
+                                            if ($_SESSION['typeID'] == 1) {
+                                                if ($row['req_status'] == 'Approved') {
                                                     ?>
                                                     <a href="/?list-zoning=<?= $row['req_status'] ?>" class="btn btn-default"
-                                                    style="margin-right: 10px;">
-                                                    <span class="bi bi-arrow-left"></span> &nbsp;
-                                                    Return
-                                                </a>
+                                                        style="margin-right: 10px;">
+                                                        <span class="bi bi-arrow-left"></span> &nbsp;
+                                                        Return
+                                                    </a>
+                                                    <button class="btn btn-success" style="margin-right: 10px;"
+                                                        data-bs-toggle="modal" data-bs-target="#complete">
+                                                        <span class="bi bi-play"></span> &nbsp;
+                                                        The Application is Completed & Ready
+                                                    </button>
+                                                    <a href="?print-zoning&id=<?= $row['req_id'] ?>" target="_blank"
+                                                        class="btn btn-warning text-white">
+                                                        <span class="bi bi-printer"></span> &nbsp;
+                                                        Print Application
+                                                    </a>
                                                     <?php
+                                                } elseif ($row['req_status'] == 'Completed') {
+                                                    ?>
+                                                    <a href="/?list-zoning=<?= $row['req_status'] ?>" class="btn btn-default"
+                                                        style="margin-right: 10px;">
+                                                        <span class="bi bi-arrow-left"></span> &nbsp;
+                                                        Return
+                                                    </a>
+                                                    <button class="btn btn-success" style="margin-right: 10px;"
+                                                        data-bs-toggle="modal" data-bs-target="#release">
+                                                        <span class="bi bi-save"></span> &nbsp;
+                                                        The Application is now released
+                                                    </button>
+                                                    <?php
+                                                } elseif ($row['req_status'] == 'Pending') {
+                                                    ?>
+                                                    <span id="checking_validation_first" style="display: none;">
+                                                        <a href="/?list-zoning=<?= $row['req_status'] ?>"
+                                                            class="btn btn-default" style="margin-right: 10px;">
+                                                            <span class="bi bi-arrow-left"></span> &nbsp;
+                                                            Return
+                                                        </a>
+                                                        <button class="btn btn-success" style="margin-right: 10px;"
+                                                            data-bs-toggle="modal" data-bs-target="#approval">
+                                                            <span class="bi bi-check"></span> &nbsp;
+                                                            Approve Application
+                                                        </button>
+                                                        <button class="btn btn-danger" data-bs-toggle="modal"
+                                                            data-bs-target="#decline">
+                                                            <span class="bi bi-trash"></span> &nbsp;
+                                                            Decline Application
+                                                        </button>
+                                                        &ensp; OR &ensp;
+                                                        <button class="btn btn-primary" data-bs-toggle="modal"
+                                                            data-bs-target="#verify" onclick="verify_id()">
+                                                            <span class="bi bi-search"></span> &nbsp;
+                                                            Verify from Master List
+                                                        </button>
+                                                    </span>
+                                                <?php } else {
+                                                    if (!isset($_GET['type'])) {
+
+                                                        ?>
+                                                        <a href="/?list-zoning=<?= $row['req_status'] ?>" class="btn btn-default"
+                                                            style="margin-right: 10px;">
+                                                            <span class="bi bi-arrow-left"></span> &nbsp;
+                                                            Return
+                                                        </a>
+                                                        <?php
+                                                    }
                                                 }
-                                            } 
-                                            }else{
+                                            } else {
                                                 ?>
-                                                <a href="/?member" class="btn btn-default"
-                                                    style="margin-right: 10px;">
+                                                <a href="/?member" class="btn btn-default" style="margin-right: 10px;">
                                                     <span class="bi bi-arrow-left"></span> &nbsp;
                                                     Return
                                                 </a>
                                                 <?php
-                                            } 
+                                            }
                                             ?>
                                         </center>
                                     </div>
@@ -324,28 +379,30 @@ if (!$result_ref) {
 if ($result_ref->num_rows > 0) {
     $row_ref = $result_ref->fetch_assoc();
     $link_data_id = $row_ref['req_id'];
-    ?><script>
-    function displayForm2() {
-        document.getElementById('loading').style.display = 'none';
-        document.getElementById('found').style.display = 'block';
-    }
+    ?>
+    <script>
+        function displayForm2() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('found').style.display = 'block';
+        }
 
-    function verify_id(){
-        setTimeout(displayForm2, 3000);
-    }
+        function verify_id() {
+            setTimeout(displayForm2, 3000);
+        }
     </script>
     <?php
 } else {
     $link_data_id = '0';
-    ?><script>
-    function displayForm2() {
-        document.getElementById('loading').style.display = 'none';
-        document.getElementById('not_found').style.display = 'block';
-    }
+    ?>
+    <script>
+        function displayForm2() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('not_found').style.display = 'block';
+        }
 
-    function verify_id(){
-        setTimeout(displayForm2, 3000);
-    }
+        function verify_id() {
+            setTimeout(displayForm2, 3000);
+        }
     </script>
     <?php
 }
