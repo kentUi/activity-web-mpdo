@@ -147,81 +147,9 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card">
+                        <div class="card mb-4">
                                 <div class="card-header">
-                                    Options
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <!--  -->
-                                                    <select class="form-control" id="option_filter">
-                                                        <?php
-                                                        if (isset($_GET['filter'])) {
-                                                            $filter = $_GET['filter'];
-                                                            ?>
-                                                            <option value="<?= $filter ?>" selected>
-                                                                <?= $filter ?>
-                                                            </option>
-                                                            <option value="" disabled>--FILTER BY STATUS --</option>
-                                                            <?php
-                                                        } else {
-                                                            $filter = 'All';
-                                                            ?>
-                                                            <option value="" disabled selected>--FILTER BY STATUS --</option>
-                                                            <?php
-                                                        }
-                                                        ?>
-                                                        <option value="All" selected>All</option>
-                                                        <option value="Pending">Pending</option>
-                                                        <option value="Declined">Declined</option>
-                                                        <option value="Approved">Approved</option>
-                                                        <option value="Completed">Completed</option>
-                                                        <option value="Released">Released</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-12 mt-2">
-                                                    <input type="date" value="<?= date('Y-m-01') ?>" id="range_from"
-                                                        class="form-control">
-                                                </div>
-                                                <div class="col-md-12 mt-2">
-                                                    <input type="date" value="<?= date('Y-m-t') ?>" id="range_to"
-                                                        class="form-control">
-                                                </div>
-                                                <div class="col-md-12 mt-2">
-                                                    <button onclick="range()" style="width: 100%"
-                                                        class="btn btn-primary">Go</button>
-                                                </div>
-                                                <div class="col-md-12 mt-2">
-                                                    <a href="./pages/v1/zoning/print.php?type=<?= $type ?>&filter=<?= $filter ?>&from=<?= $fromx ?>&to=<?= $tox ?>"
-                                                        target="_blank" style="width: 100%"
-                                                        class="btn btn-success">Print</a>
-                                                </div>
-                                            </div>
-                                            <script>
-                                                function range() {
-                                                    const filter = document.getElementById('option_filter').value;
-                                                    const from = document.getElementById('range_from').value;
-                                                    const to_date = document.getElementById('range_to').value;
-
-                                                    const link = '?generate-reports-zonings-zoning&type=<?= $type ?>&filter=' + filter + '&from=' + from + '&to=' + to_date;
-                                                    window.location.href = link;
-                                                }
-                                            </script>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card mt-4">
-                                <div class="card-header">
-                                    Quick Links
+                                    Categories
                                 </div>
                                 <div class="card-body">
                                     <div class="d-grid">
@@ -297,6 +225,79 @@
 
                                 </div>
                             </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    Options
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <!--  -->
+                                                    <select class="form-control" id="option_filter">
+                                                        <?php
+                                                        if (isset($_GET['filter'])) {
+                                                            $filter = $_GET['filter'];
+                                                            ?>
+                                                            <option value="<?= $filter ?>" selected>
+                                                                <?= $filter ?>
+                                                            </option>
+                                                            <option value="" disabled>--FILTER BY STATUS --</option>
+                                                            <?php
+                                                        } else {
+                                                            $filter = 'All';
+                                                            ?>
+                                                            <option value="" disabled selected>--FILTER BY STATUS --</option>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                        <option value="All" selected>All</option>
+                                                        <option value="Pending">Pending</option>
+                                                        <option value="Declined">Declined</option>
+                                                        <option value="Approved">Approved</option>
+                                                        <option value="Completed">Completed</option>
+                                                        <option value="Released">Released</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-12 mt-2">
+                                                    <input type="date" value="<?= date('Y-m-01') ?>" id="range_from"
+                                                        class="form-control">
+                                                </div>
+                                                <div class="col-md-12 mt-2">
+                                                    <input type="date" value="<?= date('Y-m-t') ?>" id="range_to"
+                                                        class="form-control">
+                                                </div>
+                                                <div class="col-md-12 mt-2">
+                                                    <button onclick="range()" style="width: 100%"
+                                                        class="btn btn-primary">Go</button>
+                                                </div>
+                                                <div class="col-md-12 mt-2">
+                                                    <a href="./pages/v1/zoning/print.php?type=<?= $type ?>&filter=<?= $filter ?>&from=<?= $fromx ?>&to=<?= $tox ?>"
+                                                        target="_blank" style="width: 100%"
+                                                        class="btn btn-success">Print</a>
+                                                </div>
+                                            </div>
+                                            <script>
+                                                function range() {
+                                                    const filter = document.getElementById('option_filter').value;
+                                                    const from = document.getElementById('range_from').value;
+                                                    const to_date = document.getElementById('range_to').value;
+
+                                                    const link = '?generate-reports-zonings-zoning&type=<?= $type ?>&filter=' + filter + '&from=' + from + '&to=' + to_date;
+                                                    window.location.href = link;
+                                                }
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     <?php

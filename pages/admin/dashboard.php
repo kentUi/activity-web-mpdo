@@ -76,6 +76,7 @@ $release_count_corp = $rrw_corp['i'];
                                     <tr>
                                         <th class="type" width="150">Type</th>
                                         <th>Description</th>
+                                        <th>...</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -84,11 +85,23 @@ $release_count_corp = $rrw_corp['i'];
                                         <td>
                                             <?= number_format($pending_count, 0) ?>
                                         </td>
+                                        <td class="d-grid">
+                                            <a target="_blank" href="?generate-reports-localize&type=zoning&filter=Pending"
+                                                class="btn btn-light btn-sm btn-block" style="text-align: center;">
+                                                <spa class="bi bi-eye">View</spa>
+                                            </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="type"><b>Approved : </b></td>
                                         <td>
                                             <?= number_format($approved_count, 0) ?>
+                                        </td>
+                                        <td class="d-grid">
+                                            <a target="_blank" href="?generate-reports-localize&type=zoning&filter=Approved"
+                                                class="btn btn-light btn-sm btn-block" style="text-align: center;">
+                                                <spa class="bi bi-eye">View</spa>
+                                            </a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -96,17 +109,35 @@ $release_count_corp = $rrw_corp['i'];
                                         <td>
                                             <?= number_format($decline_count, 0) ?>
                                         </td>
+                                        <td class="d-grid">
+                                            <a target="_blank" href="?generate-reports-localize&type=zoning&filter=Declined"
+                                                class="btn btn-light btn-sm btn-block" style="text-align: center;">
+                                                <spa class="bi bi-eye">View</spa>
+                                            </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="type"><b>Completed : </b></td>
                                         <td>
                                             <?= number_format($completed_count, 0) ?>
                                         </td>
+                                        <td class="d-grid">
+                                            <a target="_blank" href="?generate-reports-localize&type=zoning&filter=Completed"
+                                                class="btn btn-light btn-sm btn-block" style="text-align: center;">
+                                                <spa class="bi bi-eye">View</spa>
+                                            </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="type"><b>Released : </b></td>
                                         <td>
                                             <?= number_format($release_count, 0) ?>
+                                        </td>
+                                        <td class="d-grid">
+                                            <a target="_blank" href="?generate-reports-localize&type=zoning&filter=Released"
+                                                class="btn btn-light btn-sm btn-block" style="text-align: center;">
+                                                <spa class="bi bi-eye">View</spa>
+                                            </a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -120,6 +151,7 @@ $release_count_corp = $rrw_corp['i'];
                                     <tr>
                                         <th class="type" width="150">Type</th>
                                         <th>Description</th>
+                                        <th>...</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -128,11 +160,23 @@ $release_count_corp = $rrw_corp['i'];
                                         <td>
                                             <?= number_format($pending_count_corp, 0) ?>
                                         </td>
+                                        <td class="d-grid">
+                                            <a target="_blank" href="?generate-reports-localize&type=localize&filter=Pending"
+                                                class="btn btn-light btn-sm btn-block" style="text-align: center;">
+                                                <spa class="bi bi-eye">View</spa>
+                                            </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="type"><b>Approved : </b></td>
                                         <td>
                                             <?= number_format($approved_count_corp, 0) ?>
+                                        </td>
+                                        <td class="d-grid">
+                                            <a target="_blank" href="?generate-reports-localize&type=localize&filter=Approved"
+                                                class="btn btn-light btn-sm btn-block" style="text-align: center;">
+                                                <spa class="bi bi-eye">View</spa>
+                                            </a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -140,17 +184,35 @@ $release_count_corp = $rrw_corp['i'];
                                         <td>
                                             <?= number_format($decline_count_corp, 0) ?>
                                         </td>
+                                        <td class="d-grid">
+                                            <a target="_blank" href="?generate-reports-localize&type=localize&filter=Declined"
+                                                class="btn btn-light btn-sm btn-block" style="text-align: center;">
+                                                <spa class="bi bi-eye">View</spa>
+                                            </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="type"><b>Completed : </b></td>
                                         <td>
                                             <?= number_format($completed_count_corp, 0) ?>
                                         </td>
+                                        <td class="d-grid">
+                                            <a target="_blank" href="?generate-reports-localize&type=localize&filter=Completed"
+                                                class="btn btn-light btn-sm btn-block" style="text-align: center;">
+                                                <spa class="bi bi-eye">View</spa>
+                                            </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="type"><b>Released : </b></td>
                                         <td>
                                             <?= number_format($release_count_corp, 0) ?>
+                                        </td>
+                                        <td class="d-grid">
+                                            <a target="_blank" href="?generate-reports-localize&type=localize&filter=Released"
+                                                class="btn btn-light btn-sm btn-block" style="text-align: center;">
+                                                <spa class="bi bi-eye">View</spa>
+                                            </a>
                                         </td>
                                     </tr>
                                 </tbody>
