@@ -48,9 +48,15 @@
                     function reason() {
                         var reason = document.getElementById('reason').value;
                         <?php
-                        $data_url_decline = 'id=' . $_GET['id'] . '&name=' . $row['local_corporation'] ;
+                        $data_url_decline = 'id=' . $_GET['id'] . '&name=' . $row['local_corporation'];
+
+                        $accid = $row['local_accid'];
+                        $sql_res = "SELECT * FROM t_accounts ON rs_by = acc_id WHERE rs_appid = '$accid' AND rs_type = 'localize'";
+
+                        $result_res = $conn->query($sql_res);
+                        $row_res = $result_res->fetch_assoc();
                         ?>
-                        window.location.href = './app/api/api.php?localize-decline&<?= $data_url_decline ?>&reason=' + reason;
+                        window.location.href = './app/api/api.php?localize-decline&<?= $data_url_decline ?>&reason=' + reason + "&email=<?= $row_res['acc_email'] ?>";
                     }
                 </script>
             </div>
@@ -73,11 +79,12 @@
                     $data_url = 'id=' . $_GET['id'] . '&name=' . $row['local_corporation'];
                     ?>
                     <div style="padding-left: 45px; padding-right: 45px; display: none;" id="schedule">
-                        <input type="date" min="<?= date('Y-m-') . (date('d') + 1) ?>" value="<?= date('Y-m-') . (date('d') + 1) ?>" class="form-control" style="text-align: center; border: 1px solid #e1e1e1;" id="date">
+                        <input type="date" min="<?= date('Y-m-') . (date('d') + 1) ?>"
+                            value="<?= date('Y-m-') . (date('d') + 1) ?>" class="form-control"
+                            style="text-align: center; border: 1px solid #e1e1e1;" id="date">
                         <small style="text-transform: uppercase; letter-spacing: 1px;">Assign Schedule</small>
                         <span class="d-grid">
-                            <button onclick="confirm()"
-                                class="btn btn-success btn-sm mt-2">
+                            <button onclick="confirm()" class="btn btn-success btn-sm mt-2">
                                 Confirm & Submit
                             </button>
                             <button onclick="back()" class="btn btn-danger btn-sm mt-1">
@@ -107,12 +114,12 @@
                         }
 
                         function confirm() {
-                        var date = document.getElementById('date').value;
-                        <?php
-                        $data_url_complete = 'id=' . $_GET['id'] . '&name=' . $row['local_corporation'];
-                        ?>
-                        window.location.href = './app/api/api.php?localize-complete&<?= $data_url_complete ?>&date=' + date;
-                    }
+                            var date = document.getElementById('date').value;
+                            <?php
+                            $data_url_complete = 'id=' . $_GET['id'] . '&name=' . $row['local_corporation'];
+                            ?>
+                            window.location.href = './app/api/api.php?localize-complete&<?= $data_url_complete ?>&date=' + date;
+                        }
                     </script>
                 </center>
                 <br>
@@ -133,7 +140,7 @@
                     <h4>The Documents <br> has been release ?</h4>
                     <br>
                     <?php
-                    $data_url = 'id=' . $_GET['id'] . '&name=' . $row['local_corporation'] ;
+                    $data_url = 'id=' . $_GET['id'] . '&name=' . $row['local_corporation'];
                     ?>
                     <a href="./app/api/api.php?localize-release&<?= $data_url ?>" class="btn btn-success btn-sm"
                         style="margin-right: 10px;">
@@ -167,7 +174,8 @@
                     <div id="found" style="display: none;">
                         <img src="/assets/done.png" height="100" class="mb-3">
                         <h4><b>Record Found!</b></h4>
-                        Reference: [<a style="text-decoration: none;" target="_blank" href="?local&id=<?= $link_data_id ?>">Previous Request</a>]
+                        Reference: [<a style="text-decoration: none;" target="_blank"
+                            href="?local&id=<?= $link_data_id ?>">Previous Request</a>]
                         <br><br>
                     </div>
                     <div id="not_found" style="display: none;">

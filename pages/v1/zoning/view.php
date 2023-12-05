@@ -54,9 +54,17 @@ $conn->close();
                                 <?php
                                 if ($row['req_status'] == 'Completed') {
                                     ?>
-                                    <span style="right: 45px; top: 76px; position: absolute;">To be Claim at :
+                                    <span style="right: 45px; top: 76px; position: absolute;">To be Claim on :
                                         <b class="text-danger">
                                             <?= date_format(date_create($row['req_tobeclaim']), 'F d, Y') ?>
+                                        </b>
+                                    </span>
+                                    <?php
+                                }elseif ($row['req_status'] == 'Released') {
+                                    ?>
+                                    <span style="right: 45px; top: 76px; position: absolute;">Date Released :
+                                        <b class="text-success">
+                                            <?= date_format(date_create($row['req_daterelease']), 'F d, Y') ?>
                                         </b>
                                     </span>
                                     <?php

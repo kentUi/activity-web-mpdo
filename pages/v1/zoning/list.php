@@ -13,7 +13,7 @@
                         <form action="/?list" method="GET">
                             <div class="row">
                                 <div class="col-md-9">
-                                    <input type="hidden" name="list" value="<?= $_GET['list-zoning'] ?>">
+                                    <input type="hidden" name="list-zoning" value="<?= $_GET['list-zoning'] ?>">
                                     <input name="search" placeholder="Search application here.." type="text"
                                         class="form-control">
                                 </div>

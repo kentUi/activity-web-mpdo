@@ -30,7 +30,7 @@ $row = $result->fetch_assoc();
 
 ?>
 
-<body >
+<body onload="<?= $load ?>">
 <style>
     hr {
         border-color: #000 !important;

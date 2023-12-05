@@ -128,9 +128,17 @@ $words = convertNumberToWords($number);
                                 if ($row['local_status'] == 'Completed') {
                                     ?>
                                     <span style="right: 45px; top: 76px; position: absolute;">
-                                        To be Claim at :
+                                        To be Claim on :
                                         <b class="text-danger">
                                             <?= date_format(date_create($row['local_tobeclaim']), 'F d, Y') ?>
+                                        </b>
+                                    </span>
+                                    <?php
+                                }elseif ($row['local_status'] == 'Released') {
+                                    ?>
+                                    <span style="right: 45px; top: 76px; position: absolute;">Date Released :
+                                        <b class="text-success">
+                                            <?= date_format(date_create($row['local_daterelease']), 'F d, Y') ?>
                                         </b>
                                     </span>
                                     <?php
@@ -409,15 +417,38 @@ $words = convertNumberToWords($number);
                                                     $row_req = $result_req->fetch_assoc();
                                                     ?>
                                                     <li>
-                                                        <a target="_blank" href="/<?= $row_req['local_path'] ?>"
+                                                        <a target="_blank" onclick="checking_<?= $i ?>(1)"
+                                                            href="/<?= $row_req['local_path'] ?>"
                                                             style="text-decoration: none" href="#">
                                                             <?= $req[$i] ?>
                                                         </a>
                                                     </li>
                                                 <?php } ?>
                                             </ul>
-                                            <?php 
-                                            if($row['req_status'] == 'Declined'){
+                                            <script>
+
+                                                <?php
+                                                for ($i = 0; $i < count($req); $i++) {
+                                                    ?>
+                                                    var validate_requirments_<?= $i ?> = 0;
+                                                    function checking_<?= $i ?>(num) {
+                                                        validate_requirments_<?= $i ?> = 1;
+                                                        checked();
+                                                    }
+                                                    <?php
+                                                }
+                                                ?>
+
+                                                function checked() {
+                                                    var opened = Number(validate_requirments_0) + Number(validate_requirments_1) + Number(validate_requirments_2) + Number(validate_requirments_3) + Number(validate_requirments_4) + Number(validate_requirments_5) + Number(validate_requirments_6) + Number(validate_requirments_7) + Number(validate_requirments_8);
+
+                                                    if (opened >= 9) {
+                                                        document.getElementById('checking_validation_first').style.display = 'block';
+                                                    }
+                                                }
+                                            </script>
+                                            <?php
+                                            if ($row['local_status'] == 'Declined') {
                                                 require('./config/database.php');
 
                                                 $sql_res = "SELECT * FROM t_reasons INNER JOIN t_accounts ON rs_by = acc_id WHERE rs_appid = '$id' AND rs_type = 'localize'";
@@ -426,13 +457,19 @@ $words = convertNumberToWords($number);
                                                 $row_res = $result_res->fetch_assoc();
                                                 ?>
                                                 <hr>
-                                                 <p><b style="color: red;">REASON :</b> (Specific Details) <br> <small> Declined By: <?= $row_res['acc_fname'] ?> <?= $row_res['acc_lname'] ?></small></p>
+                                                <p><b style="color: red;">REASON :</b> (Specific Details) <br> <small>
+                                                        Declined By:
+                                                        <?= $row_res['acc_fname'] ?>
+                                                        <?= $row_res['acc_lname'] ?>
+                                                    </small></p>
                                                 <div class="jumbotron">
-                                                <p><b>Reason</b>: <?= $row_res['rs_details'] ?> </p> 
+                                                    <p><b>Reason</b>:
+                                                        <?= $row_res['rs_details'] ?>
+                                                    </p>
                                                 </div>
                                                 <?php
                                             }
-                                           ?>
+                                            ?>
                                         </blockquote>
                                         <hr>
                                         <center>
@@ -471,27 +508,29 @@ $words = convertNumberToWords($number);
                                                     <?php
                                                 } elseif ($row['local_status'] == 'Pending') {
                                                     ?>
-                                                    <a href="/?list-localize=<?= $row['local_status'] ?>"
-                                                        class="btn btn-default" style="margin-right: 10px;">
-                                                        <span class="bi bi-arrow-left"></span> &nbsp;
-                                                        Return
-                                                    </a>
-                                                    <button class="btn btn-success" style="margin-right: 10px;"
-                                                        data-bs-toggle="modal" data-bs-target="#approval">
-                                                        <span class="bi bi-check"></span> &nbsp;
-                                                        Approve Application
-                                                    </button>
-                                                    <button class="btn btn-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#decline">
-                                                        <span class="bi bi-trash"></span> &nbsp;
-                                                        Decline Application
-                                                    </button>
-                                                    &ensp; OR &ensp;
-                                                    <button class="btn btn-primary" data-bs-toggle="modal"
-                                                        data-bs-target="#verify" onclick="verify_id()">
-                                                        <span class="bi bi-search"></span> &nbsp;
-                                                        Verify from Master List
-                                                    </button>
+                                                    <span id="checking_validation_first" style="display: none;">
+                                                        <a href="/?list-localize=<?= $row['local_status'] ?>"
+                                                            class="btn btn-default" style="margin-right: 10px;">
+                                                            <span class="bi bi-arrow-left"></span> &nbsp;
+                                                            Return
+                                                        </a>
+                                                        <button class="btn btn-success" style="margin-right: 10px;"
+                                                            data-bs-toggle="modal" data-bs-target="#approval">
+                                                            <span class="bi bi-check"></span> &nbsp;
+                                                            Approve Application
+                                                        </button>
+                                                        <button class="btn btn-danger" data-bs-toggle="modal"
+                                                            data-bs-target="#decline">
+                                                            <span class="bi bi-trash"></span> &nbsp;
+                                                            Decline Application
+                                                        </button>
+                                                        &ensp; OR &ensp;
+                                                        <button class="btn btn-primary" data-bs-toggle="modal"
+                                                            data-bs-target="#verify" onclick="verify_id()">
+                                                            <span class="bi bi-search"></span> &nbsp;
+                                                            Verify from Master List
+                                                        </button>
+                                                    </span>
                                                 <?php } else {
                                                     if (!isset($_GET['type'])) {
 

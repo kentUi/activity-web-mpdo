@@ -50,7 +50,7 @@
                         <?php
                         $data_url_decline = 'id=' . $_GET['id'] . '&name=' . $row['req_firstName'] . ' ' . $row['req_lastName'];
                         ?>
-                        window.location.href = './app/api/api.php?zone-decline&<?= $data_url_decline ?>&reason=' + reason;
+                        window.location.href = './app/api/api.php?zone-decline&<?= $data_url_decline ?>&reason=' + reason + "&email=<?= $row['req_email'] ?>";
                     }
                 </script>
             </div>
